@@ -31,6 +31,35 @@ Route::get('/portofolio/{slug}', [PublicProjectController::class, 'show'])->name
 Route::get('/artikel', [PublicArticleController::class, 'index'])->name('articles.index');
 Route::get('/artikel/{slug}', [PublicArticleController::class, 'show'])->name('articles.show');
 
+// Helper route untuk migrasi database di Hostinger
+Route::get('/run-migration', function () {
+    if (request('key') !== 'akbadmin123') {
+        return 'Akses ditolak. Gunakan URL: /run-migration?key=akbadmin123';
+    }
+
+    try {
+        if (config('database.default') === 'sqlite') {
+            $dbPath = config('database.connections.sqlite.database');
+            if (!file_exists($dbPath)) {
+                $dir = dirname($dbPath);
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755, true);
+                }
+                touch($dbPath);
+            }
+        }
+
+        \Artisan::call('migrate:fresh', [
+            '--seed' => true,
+            '--force' => true
+        ]);
+
+        return 'Migrasi dan seeder database berhasil dijalankan di Hostinger!';
+    } catch (\Exception $e) {
+        return 'Terjadi error: ' . $e->getMessage();
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin Auth Routes
