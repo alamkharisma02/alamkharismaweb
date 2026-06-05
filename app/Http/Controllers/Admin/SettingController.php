@@ -105,7 +105,7 @@ class SettingController extends Controller
                 }
 
                 $path = $request->file($fileKey)->store('settings', 'public');
-                Setting::set($dbKey, \Illuminate\Support\Facades\Storage::url($path));
+                Setting::set($dbKey, '/storage/' . $path);
             } elseif ($request->input($urlKey)) {
                 Setting::set($dbKey, $request->input($urlKey));
             }

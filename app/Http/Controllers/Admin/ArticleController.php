@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         if ($request->hasFile('cover_file')) {
             $path = $request->file('cover_file')->store('articles/covers', 'public');
-            $validated['cover_image'] = Storage::url($path);
+            $validated['cover_image'] = '/storage/' . $path;
         }
 
         Article::create($validated);
@@ -98,7 +98,7 @@ class ArticleController extends Controller
             }
             
             $path = $request->file('cover_file')->store('articles/covers', 'public');
-            $validated['cover_image'] = Storage::url($path);
+            $validated['cover_image'] = '/storage/' . $path;
         }
 
         $article->update($validated);

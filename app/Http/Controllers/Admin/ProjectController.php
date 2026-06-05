@@ -48,7 +48,7 @@ class ProjectController extends Controller
         // Handle cover image
         if ($request->hasFile('cover_image_file')) {
             $path = $request->file('cover_image_file')->store('projects/covers', 'public');
-            $validated['cover_image'] = Storage::url($path);
+            $validated['cover_image'] = '/storage/' . $path;
         }
 
         // Handle gallery images
@@ -56,7 +56,7 @@ class ProjectController extends Controller
         if ($request->hasFile('gallery_files')) {
             foreach ($request->file('gallery_files') as $file) {
                 $path = $file->store('projects/gallery', 'public');
-                $gallery[] = Storage::url($path);
+                $gallery[] = '/storage/' . $path;
             }
         }
         $validated['gallery_images'] = $gallery;
@@ -101,7 +101,7 @@ class ProjectController extends Controller
             }
             
             $path = $request->file('cover_image_file')->store('projects/covers', 'public');
-            $validated['cover_image'] = Storage::url($path);
+            $validated['cover_image'] = '/storage/' . $path;
         }
 
         // Handle gallery images
@@ -124,7 +124,7 @@ class ProjectController extends Controller
         if ($request->hasFile('gallery_files')) {
             foreach ($request->file('gallery_files') as $file) {
                 $path = $file->store('projects/gallery', 'public');
-                $gallery[] = Storage::url($path);
+                $gallery[] = '/storage/' . $path;
             }
         }
         $validated['gallery_images'] = $gallery;
