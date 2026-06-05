@@ -20,10 +20,16 @@ if ($isNewDb) {
 $storageLink = __DIR__.'/public/storage';
 $storageTarget = __DIR__.'/storage/app/public';
 if (!file_exists($storageLink)) {
-    if (is_link($storageLink)) {
-        @unlink($storageLink);
+    try {
+        if (is_link($storageLink)) {
+            @unlink($storageLink);
+        }
+        if (function_exists('symlink')) {
+            @symlink($storageTarget, $storageLink);
+        }
+    } catch (\Throwable $e) {
+        // Suppress any symlink errors on restricted hosting environments
     }
-    @symlink($storageTarget, $storageLink);
 }
 
 // Determine if the application is in maintenance mode...
@@ -42,8 +48,8 @@ if ($isNewDb) {
     try {
         $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
         $kernel->call('migrate', ['--force' => true, '--seed' => true]);
-    } catch (\Exception $e) {
-        // Silently fall back if there's any config mismatch
+    } catch (\Throwable $e) {
+        // Silently fall back if there's any config or permission mismatch
     }
 }
 
