@@ -18,9 +18,13 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Route static assets (build, images, storage) to public directory
-    RewriteCond %{REQUEST_URI} ^/(build|images|storage)/
+    # Route static assets (build, images) to public directory
+    RewriteCond %{REQUEST_URI} ^/(build|images)/
     RewriteRule ^(.*)$ public/$1 [L]
+
+    # Route storage requests directly to storage/app/public (bypasses PHP symlink requirement)
+    RewriteCond %{REQUEST_URI} ^/storage/
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
