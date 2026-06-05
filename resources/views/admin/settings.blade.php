@@ -194,16 +194,28 @@
                         <!-- Step Label and Preview -->
                         <div class="md:col-span-4 space-y-2">
                             <span class="text-xs font-bold text-slate-700 uppercase tracking-wider block">{{ $stepNames[$i] }}</span>
-                            @if($dbImg)
+                            
+                            <!-- Current Image Container -->
+                            <div id="current-workflow-{{ $i }}-container" class="space-y-1.5">
+                                @if($dbImg)
+                                    <div class="w-32 h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                                        <img src="{{ $dbImg }}" class="w-full h-full object-cover" alt="Preview">
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 block truncate" title="{{ $dbImg }}">URL Saat Ini: {{ basename($dbImg) }}</span>
+                                @else
+                                    <div class="w-32 h-20 rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-400 text-xs">
+                                        Belum ada gambar
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- New Image Preview Container -->
+                            <div id="preview-workflow-{{ $i }}-container" class="space-y-1.5 hidden">
+                                <span class="text-[10px] text-brand-primary font-bold uppercase tracking-wider block">Preview Gambar Baru:</span>
                                 <div class="w-32 h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
-                                    <img src="{{ $dbImg }}" class="w-full h-full object-cover" alt="Preview">
+                                    <img id="preview-workflow-{{ $i }}-img" class="w-full h-full object-cover" alt="Selected Preview">
                                 </div>
-                                <span class="text-[10px] text-slate-400 block truncate" title="{{ $dbImg }}">URL Saat Ini: {{ basename($dbImg) }}</span>
-                            @else
-                                <div class="w-32 h-20 rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-400 text-xs">
-                                    Belum ada gambar
-                                </div>
-                            @endif
+                            </div>
                         </div>
                         
                         <!-- Inputs -->
@@ -211,6 +223,7 @@
                             <div>
                                 <label for="workflow_step{{ $i }}_file" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Unggah Gambar Baru (Maks 4MB)</label>
                                 <input type="file" name="workflow_step{{ $i }}_file" id="workflow_step{{ $i }}_file" accept="image/*"
+                                       onchange="previewImage(this, 'preview-workflow-{{ $i }}-container', 'preview-workflow-{{ $i }}-img'); if (this.files && this.files[0]) { document.getElementById('current-workflow-{{ $i }}-container')?.classList.add('hidden'); } else { document.getElementById('current-workflow-{{ $i }}-container')?.classList.remove('hidden'); }"
                                        class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-primary/5 file:text-brand-primary hover:file:bg-brand-primary/10">
                             </div>
                             <div>

@@ -160,6 +160,54 @@
         </div>
     </div>
 
+    <script>
+        function previewImage(input, containerId, imageId) {
+            const container = document.getElementById(containerId);
+            const img = document.getElementById(imageId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                    container.classList.remove('hidden');
+                    container.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                container.classList.add('hidden');
+                container.style.display = 'none';
+            }
+        }
+
+        function previewMultipleImages(input, containerId, gridId) {
+            const container = document.getElementById(containerId);
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = '';
+            
+            if (input.files && input.files.length > 0) {
+                container.classList.remove('hidden');
+                container.style.display = 'block';
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'w-full h-full object-cover';
+                        
+                        wrapper.appendChild(img);
+                        grid.appendChild(wrapper);
+                    }
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                container.classList.add('hidden');
+                container.style.display = 'none';
+            }
+        }
+    </script>
+
     @yield('scripts')
 </body>
 </html>

@@ -9,12 +9,23 @@ class Setting extends Model
     protected $fillable = ['key', 'value'];
 
     /**
+     * @var array|null
+     */
+    protected static $cachedSettings = null;
+
+    /**
      * Helper to get a setting value by key.
      */
     public static function get(string $key, $default = null)
     {
-        $setting = self::where('key', $key)->first();
-        return $setting ? $setting->value : $default;
+        if (self::$cachedSettings === null) {
+            try {
+                self::$cachedSettings = self::pluck('value', 'key')->all();
+            } catch (\Throwable $e) {
+                return $default;
+            }
+        }
+        return self::$cachedSettings[$key] ?? $default;
     }
 
     /**
@@ -22,9 +33,17 @@ class Setting extends Model
      */
     public static function set(string $key, $value)
     {
-        return self::updateOrCreate(
+        $result = self::updateOrCreate(
             ['key' => $key],
             ['value' => $value]
         );
+        
+        if (self::$cachedSettings !== null) {
+            self::$cachedSettings[$key] = $value;
+        } else {
+            self::$cachedSettings = [$key => $value];
+        }
+        
+        return $result;
     }
 }

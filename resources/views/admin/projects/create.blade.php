@@ -69,8 +69,15 @@
                 <!-- Cover Image -->
                 <div>
                     <label for="cover_image_file" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Foto Utama (Cover)*</label>
-                    <input type="file" name="cover_image_file" id="cover_image_file" accept="image/*"
+                    <input type="file" name="cover_image_file" id="cover_image_file" accept="image/*" required
+                           onchange="previewImage(this, 'cover-preview-container', 'cover-preview-img')"
                            class="block w-full text-xs text-slate-500 border border-slate-300 rounded-xl cursor-pointer bg-slate-50 focus:outline-none file:mr-4 file:py-2.5 file:px-4 file:rounded-l-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                    <div id="cover-preview-container" class="mt-3 hidden">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Preview Pilihan:</span>
+                        <div class="w-32 h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                            <img id="cover-preview-img" class="w-full h-full object-cover" alt="Selected Preview">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Video Link -->
@@ -85,7 +92,14 @@
             <div>
                 <label for="gallery_files" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Foto Galeri Pengerjaan (Bisa pilih banyak)</label>
                 <input type="file" name="gallery_files[]" id="gallery_files" accept="image/*" multiple
+                       onchange="previewMultipleImages(this, 'gallery-preview-container', 'gallery-preview-grid')"
                        class="block w-full text-xs text-slate-500 border border-slate-300 rounded-xl cursor-pointer bg-slate-50 focus:outline-none file:mr-4 file:py-2.5 file:px-4 file:rounded-l-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                <div id="gallery-preview-container" class="mt-3 hidden">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1.5">Preview Galeri Baru:</span>
+                    <div id="gallery-preview-grid" class="grid grid-cols-4 sm:grid-cols-8 gap-3">
+                        <!-- Previews will be rendered here -->
+                    </div>
+                </div>
             </div>
 
             <!-- Description -->
