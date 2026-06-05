@@ -7,6 +7,21 @@ define('LARAVEL_START', microtime(true));
 
 // Auto-initialize SQLite database if missing/empty
 $dbPath = __DIR__.'/database/database.sqlite';
+if (file_exists(__DIR__.'/.env')) {
+    $envContent = @file_get_contents(__DIR__.'/.env');
+    if ($envContent !== false) {
+        if (preg_match('/^DB_DATABASE=(.+)$/m', $envContent, $matches)) {
+            $parsedPath = trim($matches[1], " \t\n\r\0\x0B\"'");
+            // Check if it is an absolute path or relative
+            if (strpos($parsedPath, '/') === 0 || strpos($parsedPath, '\\') === 0 || preg_match('/^[a-zA-Z]:/', $parsedPath)) {
+                $dbPath = $parsedPath;
+            } else {
+                $dbPath = __DIR__ . '/' . $parsedPath;
+            }
+        }
+    }
+}
+
 $isNewDb = !file_exists($dbPath) || filesize($dbPath) == 0;
 if ($isNewDb) {
     $dbDir = dirname($dbPath);
