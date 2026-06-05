@@ -18,7 +18,7 @@ if ($isNewDb) {
 
 // Auto-create/fix storage symlink if missing or broken
 $storageLink = __DIR__.'/public/storage';
-$storageTarget = __DIR__.'/storage/app/public';
+$storageTarget = '../storage/app/public'; // Relative to the public/ directory where the symlink is placed
 if (!file_exists($storageLink)) {
     try {
         if (is_link($storageLink)) {
