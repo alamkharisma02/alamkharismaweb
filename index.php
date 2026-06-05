@@ -16,6 +16,16 @@ if ($isNewDb) {
     @touch($dbPath);
 }
 
+// Auto-create/fix storage symlink if missing or broken
+$storageLink = __DIR__.'/public/storage';
+$storageTarget = __DIR__.'/storage/app/public';
+if (!file_exists($storageLink)) {
+    if (is_link($storageLink)) {
+        @unlink($storageLink);
+    }
+    @symlink($storageTarget, $storageLink);
+}
+
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/storage/framework/maintenance.php')) {
     require $maintenance;
