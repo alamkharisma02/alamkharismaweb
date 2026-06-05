@@ -31,6 +31,12 @@
 
     <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
         
+        <!-- Sidebar Backdrop for Mobile -->
+        <div x-show="sidebarOpen" 
+             @click="sidebarOpen = false" 
+             class="fixed inset-0 z-20 bg-slate-900/60 backdrop-blur-sm transition-opacity md:hidden"
+             style="display: none;"></div>
+        
         <!-- Sidebar -->
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" 
                class="fixed inset-y-0 left-0 z-30 w-64 bg-slate-900 text-slate-400 border-r border-slate-800 transition-transform duration-300 transform md:translate-x-0 md:static md:inset-auto">

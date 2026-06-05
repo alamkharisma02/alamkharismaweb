@@ -16,7 +16,8 @@
 
     <!-- Table Card -->
     <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
+        <!-- Desktop Table View -->
+        <div class="hidden md:block overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead class="bg-slate-50 text-slate-500 font-bold text-xs uppercase border-b border-slate-200">
                     <tr>
@@ -93,6 +94,62 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="grid grid-cols-1 gap-4 md:hidden p-4">
+            @forelse($articles as $article)
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col space-y-3">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-20 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-900 border border-slate-200">
+                            <img src="{{ $article->cover_image ?? 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=450&fit=crop' }}" 
+                                 class="w-full h-full object-cover" alt="Cover">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug break-words">{{ $article->title }}</h4>
+                            <p class="text-[10px] sm:text-xs text-slate-400 mt-1 flex items-center">
+                                <i class="fa-solid fa-calendar mr-1"></i> {{ $article->published_at ? $article->published_at->format('d M Y') : '-' }}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">{{ $article->category }}</span>
+                            <span class="inline-flex px-2 py-0.5 rounded text-[9px] font-bold border 
+                                {{ $article->is_published ? 'bg-brand-primary/10 text-brand-primary border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200' }}
+                            ">
+                                {{ $article->is_published ? 'Terbit' : 'Draft' }}
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <!-- Edit -->
+                            <a href="{{ route('admin.articles.edit', $article->id) }}" 
+                               class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors text-xs flex items-center justify-center"
+                               title="Ubah Artikel">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <!-- Delete -->
+                            <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" 
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')" 
+                                  class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                        class="p-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-colors text-xs flex items-center justify-center"
+                                        title="Hapus Artikel">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="text-center py-8 text-slate-400 text-xs sm:text-sm">
+                    Belum ada artikel yang ditulis.
+                </div>
+            @endforelse
         </div>
 
         <!-- Pagination -->
