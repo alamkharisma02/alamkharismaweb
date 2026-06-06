@@ -97,28 +97,28 @@
                         <div class="p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl flex flex-col space-y-4 hover:border-[#C5A880]/30 transition-all duration-300">
                             <span class="text-[10px] text-[#C5A880] font-bold uppercase tracking-wider block">Kunjungi Media Sosial Resmi Kami</span>
                             <div class="flex flex-wrap gap-3.5 pt-1">
-                                @if(\App\Models\Setting::get('social_instagram'))
-                                    <a href="{{ \App\Models\Setting::get('social_instagram') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-350 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                @if(\App\Models\Setting::get('social_instagram', 'https://instagram.com'))
+                                    <a href="{{ \App\Models\Setting::get('social_instagram', 'https://instagram.com') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
                                         <i class="fa-brands fa-instagram text-lg"></i>
                                     </a>
                                 @endif
-                                @if(\App\Models\Setting::get('social_tiktok'))
-                                    <a href="{{ \App\Models\Setting::get('social_tiktok') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-350 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                @if(\App\Models\Setting::get('social_tiktok', 'https://tiktok.com'))
+                                    <a href="{{ \App\Models\Setting::get('social_tiktok', 'https://tiktok.com') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
                                         <i class="fa-brands fa-tiktok text-lg"></i>
                                     </a>
                                 @endif
-                                @if(\App\Models\Setting::get('social_twitter'))
-                                    <a href="{{ \App\Models\Setting::get('social_twitter') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-350 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                @if(\App\Models\Setting::get('social_twitter', 'https://twitter.com'))
+                                    <a href="{{ \App\Models\Setting::get('social_twitter', 'https://twitter.com') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
                                         <i class="fa-brands fa-x-twitter text-lg"></i>
                                     </a>
                                 @endif
-                                @if(\App\Models\Setting::get('social_facebook'))
-                                    <a href="{{ \App\Models\Setting::get('social_facebook') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-350 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                @if(\App\Models\Setting::get('social_facebook', 'https://facebook.com'))
+                                    <a href="{{ \App\Models\Setting::get('social_facebook', 'https://facebook.com') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
                                         <i class="fa-brands fa-facebook-f text-lg"></i>
                                     </a>
                                 @endif
-                                @if(\App\Models\Setting::get('social_youtube'))
-                                    <a href="{{ \App\Models\Setting::get('social_youtube') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-350 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                @if(\App\Models\Setting::get('social_youtube', 'https://youtube.com'))
+                                    <a href="{{ \App\Models\Setting::get('social_youtube', 'https://youtube.com') }}" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
                                         <i class="fa-brands fa-youtube text-lg"></i>
                                     </a>
                                 @endif

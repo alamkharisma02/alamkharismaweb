@@ -135,7 +135,7 @@
                 <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0 opacity-0 animate-[fadeInUp_1s_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]">
                     <div class="text-center lg:text-left">
                         <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif" x-data="{ count: 0 }" x-intersect.once="let i = setInterval(() => { count++; if(count >= 130) clearInterval(i) }, 12)">
-                            <span x-text="count">0</span>+
+                            <span x-text="count">130</span>+
                         </p>
                         <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Proyek Selesai</p>
                     </div>

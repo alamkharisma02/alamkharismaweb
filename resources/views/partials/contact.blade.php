@@ -18,40 +18,40 @@
 
         <!-- Social Media Buttons -->
         <div class="flex flex-wrap items-center justify-center gap-6 pt-4">
-            @if(\App\Models\Setting::get('social_facebook'))
-                <a href="{{ \App\Models\Setting::get('social_facebook') }}" target="_blank" rel="noopener" 
+            @if(\App\Models\Setting::get('social_facebook', 'https://facebook.com'))
+                <a href="{{ \App\Models\Setting::get('social_facebook', 'https://facebook.com') }}" target="_blank" rel="noopener" 
                    class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] hover:scale-105 hover:-translate-y-1 transition-all duration-350 shadow-xl group">
                     <i class="fa-brands fa-facebook-f text-xl text-[#C5A880] group-hover:text-[#0A1E13] transition-colors duration-300"></i>
                     <span class="text-xs sm:text-sm font-bold uppercase tracking-wider">Facebook</span>
                 </a>
             @endif
 
-            @if(\App\Models\Setting::get('social_instagram'))
-                <a href="{{ \App\Models\Setting::get('social_instagram') }}" target="_blank" rel="noopener" 
+            @if(\App\Models\Setting::get('social_instagram', 'https://instagram.com'))
+                <a href="{{ \App\Models\Setting::get('social_instagram', 'https://instagram.com') }}" target="_blank" rel="noopener" 
                    class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] hover:scale-105 hover:-translate-y-1 transition-all duration-350 shadow-xl group">
                     <i class="fa-brands fa-instagram text-xl text-[#C5A880] group-hover:text-[#0A1E13] transition-colors duration-300"></i>
                     <span class="text-xs sm:text-sm font-bold uppercase tracking-wider">Instagram</span>
                 </a>
             @endif
 
-            @if(\App\Models\Setting::get('social_tiktok'))
-                <a href="{{ \App\Models\Setting::get('social_tiktok') }}" target="_blank" rel="noopener" 
+            @if(\App\Models\Setting::get('social_tiktok', 'https://tiktok.com'))
+                <a href="{{ \App\Models\Setting::get('social_tiktok', 'https://tiktok.com') }}" target="_blank" rel="noopener" 
                    class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] hover:scale-105 hover:-translate-y-1 transition-all duration-350 shadow-xl group">
                     <i class="fa-brands fa-tiktok text-xl text-[#C5A880] group-hover:text-[#0A1E13] transition-colors duration-300"></i>
                     <span class="text-xs sm:text-sm font-bold uppercase tracking-wider">TikTok</span>
                 </a>
             @endif
 
-            @if(\App\Models\Setting::get('social_twitter'))
-                <a href="{{ \App\Models\Setting::get('social_twitter') }}" target="_blank" rel="noopener" 
+            @if(\App\Models\Setting::get('social_twitter', 'https://twitter.com'))
+                <a href="{{ \App\Models\Setting::get('social_twitter', 'https://twitter.com') }}" target="_blank" rel="noopener" 
                    class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] hover:scale-105 hover:-translate-y-1 transition-all duration-350 shadow-xl group">
                     <i class="fa-brands fa-x-twitter text-xl text-[#C5A880] group-hover:text-[#0A1E13] transition-colors duration-300"></i>
                     <span class="text-xs sm:text-sm font-bold uppercase tracking-wider">Twitter / X</span>
                 </a>
             @endif
 
-            @if(\App\Models\Setting::get('social_youtube'))
-                <a href="{{ \App\Models\Setting::get('social_youtube') }}" target="_blank" rel="noopener" 
+            @if(\App\Models\Setting::get('social_youtube', 'https://youtube.com'))
+                <a href="{{ \App\Models\Setting::get('social_youtube', 'https://youtube.com') }}" target="_blank" rel="noopener" 
                    class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] hover:scale-105 hover:-translate-y-1 transition-all duration-350 shadow-xl group">
                     <i class="fa-brands fa-youtube text-xl text-[#C5A880] group-hover:text-[#0A1E13] transition-colors duration-300"></i>
                     <span class="text-xs sm:text-sm font-bold uppercase tracking-wider">YouTube</span>
