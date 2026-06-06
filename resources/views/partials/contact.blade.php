@@ -52,10 +52,32 @@
                         <div class="w-10 h-10 rounded-xl bg-[#C5A880]/10 text-[#C5A880] flex items-center justify-center font-bold flex-shrink-0 text-lg border border-[#C5A880]/20"><i class="fa-solid fa-scale-balanced"></i></div>
                         <div class="flex-1">
                             <span class="text-[10px] text-[#C5A880] font-bold uppercase tracking-wider block">Legalitas Perusahaan</span>
-                            <span class="text-slate-350 text-slate-300 text-xs block mt-1 leading-relaxed">
+                            <span class="text-slate-300 text-xs block mt-1 leading-relaxed">
                                 NIB: <span class="font-mono font-bold text-white">{{ \App\Models\Setting::get('legal_nib', '1234567890123') }}</span> | 
                                 SIUJK: <span class="font-mono font-bold text-white">{{ \App\Models\Setting::get('legal_siujk', '912/SIUJK/2024') }}</span>
                             </span>
+                        </div>
+                    </div>
+
+                    <!-- Media Sosial Card -->
+                    <div class="p-5 rounded-2xl border border-[#C5A880]/20 bg-black/20 shadow-xl flex flex-col space-y-4 hover:border-[#C5A880]/40 transition-colors duration-350">
+                        <span class="text-[10px] text-[#C5A880] font-bold uppercase tracking-wider block">Media Sosial Resmi</span>
+                        <div class="flex flex-wrap gap-3.5 pt-1">
+                            <a href="https://instagram.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </a>
+                            <a href="https://tiktok.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                <i class="fa-brands fa-tiktok text-lg"></i>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                <i class="fa-brands fa-x-twitter text-lg"></i>
+                            </a>
+                            <a href="https://facebook.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                <i class="fa-brands fa-facebook-f text-lg"></i>
+                            </a>
+                            <a href="https://youtube.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-[#C5A880] hover:text-[#0A1E13] flex items-center justify-center text-slate-300 hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
+                                <i class="fa-brands fa-youtube text-lg"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,450&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,10 +33,10 @@
     
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
         h1, h2, h3, h4, h5, h6, .font-serif {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
     </style>
     @yield('styles')
@@ -89,6 +89,7 @@
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex items-center space-x-8" x-data="{ openTentang: false }">
                     <a href="{{ route('home') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('home') ? 'text-[#C5A880]' : 'text-white/90' }}">BERANDA</a>
+                    <a href="{{ route('services') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('services') ? 'text-[#C5A880]' : 'text-white/90' }}">LAYANAN KAMI</a>
                     
                     <!-- Dropdown Tentang Kami -->
                     <div class="relative" @mouseenter="openTentang = true" @mouseleave="openTentang = false">
@@ -151,6 +152,7 @@
              x-data="{ mobTentangOpen: false }">
             <div class="px-4 space-y-3">
                 <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('home') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">BERANDA</a>
+                <a href="{{ route('services') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('services') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">LAYANAN KAMI</a>
                 
                 <!-- Mobile Dropdown Trigger -->
                 <div>

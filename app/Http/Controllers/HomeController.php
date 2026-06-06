@@ -74,4 +74,12 @@ class HomeController extends Controller
 
         return view('testimonials', compact('testimonials'));
     }
+
+    /**
+     * Display the services page.
+     */
+    public function services()
+    {
+        return view('services');
+    }
 }

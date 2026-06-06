@@ -45,8 +45,8 @@
     </div>
 
     <!-- ===== CINEMATIC OVERLAY GRADIENTS ===== -->
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0A1E13] via-[#0A1E13]/70 to-[#0A1E13]/40 z-[1]"></div>
-    <div class="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#0A1E13]/90 via-[#0A1E13]/60 to-transparent hidden lg:block z-[1]"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0A1E13] via-[#0A1E13]/85 to-[#0A1E13]/55 z-[1]"></div>
+    <div class="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#0A1E13]/95 via-[#0A1E13]/75 to-transparent hidden lg:block z-[1]"></div>
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1E13] to-transparent z-[1]"></div>
 
     <!-- ===== BACKGROUND VIDEO OVERLAY (if hero_video_url set) ===== -->
@@ -91,7 +91,7 @@
                 </div>
                 
                 <!-- Main Heading with Typewriter Reveal -->
-                <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                     @php
                         $heroTitle = \App\Models\Setting::get('hero_title', 'Mewujudkan Interior Mewah & Konstruksi Sipil Presisi');
                         $hasAmp = strpos($heroTitle, '&') !== false;
@@ -134,7 +134,7 @@
                 <!-- Trust Stats -->
                 <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0 opacity-0 animate-[fadeInUp_1s_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]">
                     <div class="text-center lg:text-left">
-                        <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif" x-data="{ count: 0 }" x-intersect.once="let i = setInterval(() => { count++; if(count >= 250) clearInterval(i) }, 8)">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif" x-data="{ count: 0 }" x-intersect.once="let i = setInterval(() => { count++; if(count >= 130) clearInterval(i) }, 12)">
                             <span x-text="count">0</span>+
                         </p>
                         <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Proyek Selesai</p>

@@ -79,6 +79,11 @@
         <!-- Decorative Glow -->
         <div class="absolute right-0 top-1/3 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[120px]"></div>
         <div class="absolute inset-0 luxury-grid-pattern opacity-5"></div>
+        
+        <!-- Watermark background -->
+        <div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-overlay">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop" class="w-full h-full object-cover select-none" alt="Watermark bg">
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 relative z-10">
             
