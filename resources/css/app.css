@@ -1,18 +1,126 @@
 @import 'tailwindcss';
-
+ 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
-
+ 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     
-    --color-brand-primary: #2D5A27;       /* Forest Green (from logo star) */
-    --color-brand-primary-hover: #1E3F1A;
-    --color-brand-accent: #C62828;        /* Bold Red (from logo circle) */
-    --color-brand-accent-hover: #A21F1F;
-    --color-brand-accent-light: #FFCDD2;
-    --color-brand-green-light: #81C784;   /* Light Green (from logo background) */
+    --color-brand-primary: #0A1E13;       /* Deep Forest Obsidian Green */
+    --color-brand-primary-hover: #050F09;
+    --color-brand-accent: #C5A880;        /* Premium Warm Metallic Gold */
+    --color-brand-accent-hover: #B4966B;
+    --color-brand-accent-light: #F4EFE6;
+    --color-brand-green-light: #D4E2D5;   /* Sophisticated light sage green */
+}
+ 
+/* Custom transitions and dynamic micro-animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+ 
+@keyframes pulseGold {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(197, 168, 128, 0);
+    }
+}
+ 
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+ 
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+ 
+.animate-fade-in-down {
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+ 
+.animate-scale-up {
+    animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+ 
+.animate-pulse-gold {
+    animation: pulseGold 2s infinite;
+}
+ 
+/* Premium Scroll Reveal styling */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+ 
+.reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+ 
+/* Luxury card patterns */
+.luxury-grid-pattern {
+    background-image: radial-gradient(rgba(197, 168, 128, 0.08) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+}
+ 
+/* Shimmer placeholder effect */
+.shimmer-bg {
+    position: relative;
+    overflow: hidden;
+    background-color: #e2e8f0;
+}
+ 
+.shimmer-bg::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 20%,
+        rgba(255, 255, 255, 0.5) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 2s infinite;
+    content: '';
 }

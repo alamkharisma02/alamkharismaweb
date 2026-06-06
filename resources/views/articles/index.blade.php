@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Artikel & Informasi Konstruksi - ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', 'Artikel & Informasi Konstruksi - ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', 'Baca artikel terbaru seputar tips sipil, teknologi material bangunan, panduan RAB, dan perkembangan arsitektur pembangunan.')
 
 @section('content')

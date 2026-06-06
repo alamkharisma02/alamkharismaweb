@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Testimoni Klien - ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', 'Testimoni Klien - ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', 'Baca ulasan kepuasan, rating, dan testimoni langsung dari klien yang telah menggunakan jasa bangun, renovasi, dan interior ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . '.')
 
 @section('content')

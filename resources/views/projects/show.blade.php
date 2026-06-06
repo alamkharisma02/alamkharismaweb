@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $project->title . ' - Portofolio ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', $project->title . ' - Portofolio ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', Str::limit(strip_tags($project->description), 150))
 
 @section('content')
@@ -159,7 +159,7 @@
                         <p class="text-xs font-semibold leading-relaxed text-slate-300">
                             Bahas rencana bangunan Anda sekarang bersama Site Engineer kami dan dapatkan estimasi RAB awal gratis.
                         </p>
-                        <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara')) }}%2C%20saya%20melihat%20detail%20proyek%20{{ urlencode($project->title) }}.%20Bisa%20berdiskusi%20lebih%20lanjut%20mengenai%20layanan%20kategori%20ini%3F" 
+                        <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20melihat%20detail%20proyek%20{{ urlencode($project->title) }}.%20Bisa%20berdiskusi%20lebih%20lanjut%20mengenai%20layanan%20kategori%20ini%3F" 
                            target="_blank"
                            class="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-accent text-slate-950 font-bold text-xs rounded-xl hover:bg-brand-accent-hover transition-colors shadow">
                             <i class="fa-brands fa-whatsapp text-lg mr-2 text-brand-primary"></i>

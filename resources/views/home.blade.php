@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))
+@section('title', \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))
 
 @section('content')
     @include('partials.hero')

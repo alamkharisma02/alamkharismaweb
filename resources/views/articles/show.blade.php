@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - Artikel ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', $article->title . ' - Artikel ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', Str::limit(strip_tags($article->content), 150))
 
 @section('content')
@@ -32,7 +32,7 @@
                             AKB
                         </div>
                         <div>
-                            <span class="block text-sm font-bold text-slate-900">Ditulis oleh: Tim Insinyur {{ \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara') }}</span>
+                            <span class="block text-sm font-bold text-slate-900">Ditulis oleh: Tim Insinyur {{ \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') }}</span>
                             <span class="block text-xs text-slate-400">Tim Ahli Sipil & Arsitektur</span>
                         </div>
                     </div>

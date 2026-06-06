@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Galeri Video Proyek - ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', 'Galeri Video Proyek - ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', 'Tonton video dokumentasi pengerjaan sipil berat, konstruksi, dan interior finishing dari ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . '.')
 
 @section('content')

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Portofolio Proyek - ' . \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara'))
+@section('title', 'Portofolio Proyek - ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara'))
 @section('meta_description', 'Jelajahi portofolio pengerjaan interior mewah, perancangan eksterior modern, dan konstruksi sipil dari ' . \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . '.')
 
 @section('content')

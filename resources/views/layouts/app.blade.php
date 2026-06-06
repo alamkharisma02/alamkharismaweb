@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- SEO Meta Tags -->
-    <title>@yield('title', \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))</title>
+    <title>@yield('title', \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))</title>
     <meta name="description" content="@yield('meta_description', \App\Models\Setting::get('hero_subtitle', 'PT Alam Kharisma Bersaudara menyediakan jasa kontraktor eksterior, interior mewah, dan konstruksi sipil berstandar tinggi secara profesional.'))">
     <meta name="keywords" content="kontraktor sipil, jasa interior, eksterior rumah, bangun rumah, renovasi gedung, PT Alam Kharisma Bersaudara, RAB transparan">
-    <meta name="author" content="{{ \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara') }}">
+    <meta name="author" content="{{ \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') }}">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', \App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))">
+    <meta property="og:title" content="@yield('title', \App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara') . ' - ' . \App\Models\Setting::get('site_tagline', 'Interior, Eksterior, dan Kontraktor Konstruksi'))">
     <meta property="og:description" content="@yield('meta_description', \App\Models\Setting::get('hero_subtitle', 'PT Alam Kharisma Bersaudara menyediakan jasa kontraktor eksterior, interior mewah, dan konstruksi sipil berstandar tinggi secara profesional.'))">
     <meta property="og:image" content="@yield('meta_image', 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop')">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,12 +33,35 @@
     
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', 'Instrument Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-serif {
+            font-family: 'Playfair Display', Georgia, serif;
         }
     </style>
     @yield('styles')
 </head>
-<body class="bg-slate-50 text-slate-900 selection:bg-brand-primary selection:text-white overflow-x-hidden">
+<body class="bg-[#F9F7F3] text-slate-900 selection:bg-brand-primary selection:text-white overflow-x-hidden">
+
+    <!-- Luxury Preloader Screen -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0A1E13] transition-all duration-700 ease-in-out">
+        <div class="relative flex flex-col items-center">
+            <!-- Helmet Logo Pulsing -->
+            <div class="relative mb-6 flex h-24 w-24 items-center justify-center rounded-full border border-[#C5A880]/30 bg-black/40 shadow-xl">
+                <i class="fa-solid fa-helmet-safety text-4xl text-[#C5A880] animate-pulse"></i>
+                <div class="absolute inset-0 rounded-full border border-dashed border-[#C5A880]/40 animate-[spin_12s_linear_infinite]"></div>
+            </div>
+            
+            <!-- Company Name -->
+            <h2 class="text-xl font-bold uppercase tracking-wider text-white font-serif mb-2">PT Alam Kharisma Bersaudara</h2>
+            <p class="text-xs tracking-[0.3em] uppercase text-[#C5A880]/80 mb-6">High-End Construction & Interior</p>
+            
+            <!-- Custom Progress Bar -->
+            <div class="h-[2px] w-48 overflow-hidden rounded bg-white/10">
+                <div id="preloader-bar" class="h-full w-0 bg-[#C5A880] transition-all duration-300 ease-out"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header / Sticky Glassmorphism Navbar -->
     <header x-data="{ mobileMenuOpen: false, isScrolled: false }" 
@@ -53,8 +76,7 @@
                          class="h-14 sm:h-16 md:h-20 w-auto transition-transform duration-300 mix-blend-multiply" 
                          alt="PT Alam Kharisma Bersaudara">
                     <div class="flex flex-col leading-tight">
-                        <span class="text-brand-primary font-extrabold text-base sm:text-lg md:text-xl tracking-wide uppercase">Alam Kharisma</span>
-                        <span class="text-brand-primary font-bold text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase">Bersaudara</span>
+                        <span class="text-brand-primary font-extrabold text-base sm:text-lg md:text-xl tracking-wide uppercase">Alam Kharisma Bersaudara</span>
                     </div>
                 </a>
 
@@ -92,7 +114,7 @@
 
                 <!-- CTA Button -->
                 <div class="hidden md:block">
-                    <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
+                    <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
                        target="_blank"
                        class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-primary text-white font-bold text-sm hover:bg-brand-primary-hover hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shadow-brand-primary/10 border border-brand-accent/25">
                         <i class="fa-brands fa-whatsapp text-lg mr-2 text-brand-accent"></i>
@@ -145,7 +167,7 @@
                 <a href="{{ route('home') }}#kontak" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary">KONTAK</a>
                 
                 <div class="pt-4 border-t border-slate-200">
-                    <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
+                    <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
                        target="_blank"
                        class="w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-brand-primary text-white font-bold text-base hover:bg-brand-primary-hover transition-colors shadow-md">
                         <i class="fa-brands fa-whatsapp text-xl mr-2 text-brand-accent"></i>
@@ -170,7 +192,7 @@
                     <a href="{{ route('home') }}" class="flex items-center group gap-3">
                         <img src="{{ asset('images/logo.png') }}" class="h-14 md:h-16 w-auto brightness-0 invert" alt="PT Alam Kharisma Bersaudara">
                         <div class="flex flex-col leading-tight">
-                            <span class="text-white font-extrabold text-base md:text-lg tracking-wide uppercase">Alam Kharisma</span>
+                            <span class="text-white font-extrabold text-base md:text-lg tracking-wide uppercase">PT Alam Kharisma Bersaudara</span>
                             <span class="text-slate-300 font-bold text-xs md:text-sm tracking-[0.2em] uppercase">Bersaudara</span>
                         </div>
                     </a>
@@ -228,6 +250,54 @@
          <!-- Ripple effect -->
          <span class="absolute -z-10 w-full h-full rounded-full bg-emerald-500/40 animate-ping"></span>
     </a>
+
+    <!-- Preloader & Scroll Reveal Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Preloader logic
+            const bar = document.getElementById('preloader-bar');
+            const preloader = document.getElementById('preloader');
+            
+            if (bar && preloader) {
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 15) + 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        bar.style.width = '100%';
+                        
+                        setTimeout(() => {
+                            preloader.classList.add('opacity-0', 'pointer-events-none');
+                            setTimeout(() => {
+                                preloader.style.display = 'none';
+                            }, 700);
+                        }, 250);
+                    } else {
+                        bar.style.width = progress + '%';
+                    }
+                }, 40);
+            }
+
+            // Scroll Reveal Observer
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            if (revealElements.length > 0) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                revealElements.forEach(el => observer.observe(el));
+            }
+        });
+    </script>
 
     @yield('scripts')
 </body>
