@@ -4,39 +4,49 @@
 @section('meta_description', 'Baca artikel terbaru seputar tips sipil, teknologi material bangunan, panduan RAB, dan perkembangan arsitektur pembangunan.')
 
 @section('content')
-    <!-- Banner Header -->
-    <section class="relative bg-slate-950 pt-36 pb-20 overflow-hidden text-center">
-        <!-- Background Overlay Image -->
-        <div class="absolute inset-0 opacity-10">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop" class="w-full h-full object-cover" alt="Background">
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-accent/5 rounded-full blur-3xl"></div>
+    <!-- Banner Space Filler -->
+    <div class="h-20 bg-[#0A1E13]"></div>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-4">
-            <span class="text-brand-accent text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-brand-accent/5 border border-brand-accent/30">Edukasi & Info</span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Artikel & Tips Konstruksi</h1>
-            <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
+    <!-- Banner Header -->
+    <section class="relative bg-gradient-to-b from-[#0A1E13] via-[#050F09] to-[#0A1E13] py-24 border-b border-[#C5A880]/10 overflow-hidden text-center">
+        <!-- Background subtle glow shapes -->
+        <div class="absolute right-0 top-0 w-96 h-96 bg-[#C5A880]/8 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl -ml-20 -mb-20"></div>
+        <div class="absolute inset-0 luxury-grid-pattern opacity-10"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-4 reveal-on-scroll">
+            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 uppercase tracking-widest animate-pulse-gold">
+                <i class="fa-solid fa-newspaper mr-1.5"></i> Edukasi & Info
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight font-serif">
+                Artikel & Tips Konstruksi
+            </h1>
+            <div class="w-20 h-[2px] bg-[#C5A880] mx-auto mt-4"></div>
+            <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-light mt-4">
                 Wawasan mendalam dari para insinyur sipil kami untuk membantu Anda merencanakan konstruksi yang kokoh, efisien, dan modern.
             </p>
         </div>
     </section>
 
     <!-- Articles Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-24 bg-[#0A1E13] relative overflow-hidden">
+        <!-- Decorative Glow -->
+        <div class="absolute left-1/2 bottom-1/4 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[120px] -translate-x-1/2"></div>
+        <div class="absolute inset-0 luxury-grid-pattern opacity-5"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Filters & Search bar -->
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 pb-6 border-b border-slate-100">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 pb-6 border-b border-white/5 reveal-on-scroll">
                 <!-- Categories -->
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-3">
                     <a href="{{ route('articles.index', ['search' => $search]) }}" 
-                       class="px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 {{ !$category ? 'bg-brand-primary text-white border-brand-primary shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-brand-primary' }}">
+                       class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border border-transparent tracking-wider uppercase {{ !$category ? 'bg-[#C5A880] text-[#0A1E13] shadow-md shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
                         Semua Kategori
                     </a>
                     @foreach($categories as $cat)
                         <a href="{{ route('articles.index', ['category' => $cat, 'search' => $search]) }}" 
-                           class="px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 {{ $category === $cat ? 'bg-brand-primary text-white border-brand-primary shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-brand-primary' }}">
+                           class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === $cat ? 'bg-[#C5A880] text-[#0A1E13] shadow-md shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
                             {{ $cat }}
                         </a>
                     @endforeach
@@ -49,8 +59,8 @@
                             <input type="hidden" name="category" value="{{ $category }}">
                         @endif
                         <input type="text" name="search" value="{{ $search }}" placeholder="Cari artikel..." 
-                               class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent">
-                        <button type="submit" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                               class="w-full pl-5 pr-12 py-3.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#C5A880] focus:border-transparent font-light font-sans">
+                        <button type="submit" class="absolute right-4 top-4 text-slate-400 hover:text-[#C5A880] transition-colors">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
@@ -60,14 +70,14 @@
             <!-- Articles Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @forelse($articles as $article)
-                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <article class="reveal-on-scroll bg-white/5 rounded-3xl overflow-hidden border border-white/10 shadow-sm hover:shadow-2xl hover:border-[#C5A880]/35 transition-all duration-350 flex flex-col">
                         <!-- Cover -->
-                        <div class="h-48 overflow-hidden bg-slate-900 relative">
+                        <div class="h-52 overflow-hidden bg-black relative">
                             <img src="{{ $article->cover_image ?? 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=450&fit=crop' }}" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
                                  alt="{{ $article->title }}">
                             <!-- Category badge -->
-                            <span class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-700">
+                            <span class="absolute top-4 left-4 bg-[#0A1E13]/85 backdrop-blur-md text-[#C5A880] text-xs font-bold px-3.5 py-1.5 rounded-lg border border-[#C5A880]/20 uppercase tracking-widest">
                                 {{ $article->category }}
                             </span>
                         </div>
@@ -75,29 +85,29 @@
                         <!-- Content -->
                         <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                             <div>
-                                <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2 font-semibold">
-                                    <span><i class="fa-solid fa-calendar mr-1"></i> {{ $article->published_at ? $article->published_at->format('d M Y') : $article->created_at->format('d M Y') }}</span>
+                                <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2 font-semibold font-mono">
+                                    <span><i class="fa-solid fa-calendar mr-2 text-[#C5A880]"></i> {{ $article->published_at ? $article->published_at->format('d M Y') : $article->created_at->format('d M Y') }}</span>
                                 </div>
-                                <h3 class="text-slate-900 font-bold text-base line-clamp-2 hover:text-brand-accent transition-colors">
+                                <h3 class="text-white font-bold text-lg font-serif line-clamp-2 hover:text-[#C5A880] transition-colors leading-snug">
                                     <a href="{{ $article->external_link ?? route('articles.show', $article->slug) }}" @if($article->external_link) target="_blank" rel="noopener" @endif>{{ $article->title }}</a>
                                 </h3>
-                                <p class="text-slate-500 text-xs line-clamp-3 mt-2 leading-relaxed">
+                                <p class="text-slate-400 text-xs sm:text-sm line-clamp-3 mt-3 leading-relaxed font-light">
                                     {{ strip_tags($article->content) }}
                                 </p>
                             </div>
  
-                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-xs text-slate-400 font-semibold">Oleh: Admin Sipil</span>
-                                <a href="{{ $article->external_link ?? route('articles.show', $article->slug) }}" @if($article->external_link) target="_blank" rel="noopener" @endif class="text-brand-primary hover:text-brand-accent font-bold text-xs inline-flex items-center">
-                                    Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                            <div class="pt-5 border-t border-white/5 flex items-center justify-between text-xs text-slate-450">
+                                <span class="text-slate-400 font-light font-sans">Oleh: Admin Sipil</span>
+                                <a href="{{ $article->external_link ?? route('articles.show', $article->slug) }}" @if($article->external_link) target="_blank" rel="noopener" @endif class="text-[#C5A880] hover:text-[#B4966B] font-bold inline-flex items-center uppercase tracking-wider">
+                                    Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-2"></i>
                                 </a>
                             </div>
                         </div>
                     </article>
                 @empty
-                    <div class="col-span-3 text-center py-16 text-slate-400">
-                        <i class="fa-solid fa-newspaper text-5xl text-slate-300 mb-4 block"></i>
-                        Tidak ada artikel yang cocok dengan pencarian atau kategori Anda.
+                    <div class="col-span-3 text-center py-20 text-slate-455">
+                        <i class="fa-solid fa-newspaper text-5xl mb-4 block text-[#C5A880]/30 animate-pulse"></i>
+                        <span class="text-slate-400">Tidak ada artikel yang cocok dengan pencarian atau kategori Anda.</span>
                     </div>
                 @endforelse
             </div>

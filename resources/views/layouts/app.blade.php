@@ -78,7 +78,7 @@
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="flex items-center group gap-2.5">
                     <img src="{{ asset('images/logo.png') }}" 
-                         class="h-10 sm:h-12 md:h-14 w-auto transition-all duration-300 brightness-0 invert" 
+                         class="h-10 sm:h-12 md:h-14 w-auto transition-all duration-300" 
                          alt="PT Alam Kharisma Bersaudara">
                     <div class="flex flex-col leading-none">
                         <span class="font-extrabold text-xs sm:text-sm md:text-base tracking-wider uppercase text-white">PT ALAM KHARISMA</span>
@@ -196,7 +196,7 @@
                 <!-- Info Kolom 1 -->
                 <div class="space-y-4">
                     <a href="{{ route('home') }}" class="flex items-center group gap-3">
-                        <img src="{{ asset('images/logo.png') }}" class="h-14 md:h-16 w-auto brightness-0 invert" alt="PT Alam Kharisma Bersaudara">
+                        <img src="{{ asset('images/logo.png') }}" class="h-14 md:h-16 w-auto" alt="PT Alam Kharisma Bersaudara">
                         <div class="flex flex-col leading-none">
                             <span class="text-white font-extrabold text-base md:text-lg tracking-wider uppercase">PT ALAM KHARISMA</span>
                             <span class="text-[#C5A880] font-bold text-xs md:text-sm tracking-[0.25em] uppercase">BERSAUDARA</span>
