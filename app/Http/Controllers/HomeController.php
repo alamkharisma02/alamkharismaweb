@@ -82,4 +82,33 @@ class HomeController extends Controller
     {
         return view('services');
     }
+
+    /**
+     * Display the contact page.
+     */
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    /**
+     * Handle client contact/inquiry form submission.
+     */
+    public function submitContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'project_type' => 'nullable|string|max:255',
+            'estimated_budget' => 'nullable|numeric|min:0',
+            'message' => 'nullable|string',
+        ]);
+
+        $validated['status'] = 'New';
+
+        \App\Models\Lead::create($validated);
+
+        return back()->with('success', 'Terima kasih! Pesan inquiry Anda berhasil dikirim. Tim kami akan segera meninjau kebutuhan Anda dan menghubungi Anda kembali.');
+    }
 }

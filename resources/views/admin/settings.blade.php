@@ -151,6 +151,40 @@
             </div>
         </div>
 
+        <!-- Card 4.5: Media Sosial Resmi -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-100 pb-2.5">
+                <i class="fa-solid fa-share-nodes text-brand-accent mr-2"></i> Tautan Media Sosial Resmi
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label for="social_facebook" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Facebook URL</label>
+                    <input type="url" name="social_facebook" id="social_facebook" value="{{ old('social_facebook', $settings['social_facebook'] ?? '') }}" placeholder="https://facebook.com/username"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+                <div>
+                    <label for="social_instagram" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instagram URL</label>
+                    <input type="url" name="social_instagram" id="social_instagram" value="{{ old('social_instagram', $settings['social_instagram'] ?? '') }}" placeholder="https://instagram.com/username"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+                <div>
+                    <label for="social_twitter" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Twitter / X URL</label>
+                    <input type="url" name="social_twitter" id="social_twitter" value="{{ old('social_twitter', $settings['social_twitter'] ?? '') }}" placeholder="https://twitter.com/username"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+                <div>
+                    <label for="social_tiktok" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">TikTok URL</label>
+                    <input type="url" name="social_tiktok" id="social_tiktok" value="{{ old('social_tiktok', $settings['social_tiktok'] ?? '') }}" placeholder="https://tiktok.com/@username"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="social_youtube" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">YouTube Channel URL</label>
+                    <input type="url" name="social_youtube" id="social_youtube" value="{{ old('social_youtube', $settings['social_youtube'] ?? '') }}" placeholder="https://youtube.com/c/channelname"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+            </div>
+        </div>
+
         <!-- Card 5: Kredibilitas & Legalitas -->
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
             <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-100 pb-2.5">
@@ -167,6 +201,78 @@
                     <input type="text" name="legal_siujk" id="legal_siujk" value="{{ old('legal_siujk', $settings['legal_siujk']) }}" required
                            class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
                 </div>
+            </div>
+        </div>
+
+        <!-- Card 5.5: Background Gambar Banner Halaman -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-100 pb-2.5">
+                <i class="fa-solid fa-image text-brand-accent mr-2"></i> Gambar Latar Belakang Banner Halaman Publik
+            </h3>
+            <p class="text-xs text-slate-500">Unggah berkas gambar (Maks 4MB) atau masukkan tautan URL eksternal untuk melapis banner judul di atas halaman publik.</p>
+            
+            <div class="space-y-6 divide-y divide-slate-100">
+                @php
+                    $pagesList = [
+                        'profile' => 'Halaman Profil Perusahaan',
+                        'services' => 'Halaman Layanan Kami',
+                        'projects' => 'Halaman Portofolio Proyek',
+                        'gallery' => 'Halaman Galeri Foto',
+                        'video_gallery' => 'Halaman Galeri Video',
+                        'testimonials' => 'Halaman Testimoni Klien',
+                        'articles' => 'Halaman Artikel & Berita',
+                        'contact' => 'Halaman Kontak Hubungi Kami',
+                    ];
+                @endphp
+                @foreach ($pagesList as $pKey => $pLabel)
+                    @php
+                        $dbImg = $settings["banner_{$pKey}_img"] ?? '';
+                        $dbUrl = $settings["banner_{$pKey}_url"] ?? '';
+                    @endphp
+                    <div class="pt-6 first:pt-0 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                        <!-- Step Label and Preview -->
+                        <div class="md:col-span-4 space-y-2">
+                            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider block">{{ $pLabel }}</span>
+                            
+                            <!-- Current Image Container -->
+                            <div id="current-banner-{{ $pKey }}-container" class="space-y-1.5">
+                                @if($dbImg)
+                                    <div class="w-32 h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                                        <img src="{{ $dbImg }}" class="w-full h-full object-cover" alt="Preview">
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 block truncate max-w-[200px]" title="{{ $dbImg }}">URL: {{ basename($dbImg) }}</span>
+                                @else
+                                    <div class="w-32 h-20 rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-400 text-xs">
+                                        Belum ada gambar
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- New Image Preview Container -->
+                            <div id="preview-banner-{{ $pKey }}-container" class="space-y-1.5 hidden">
+                                <span class="text-[10px] text-brand-primary font-bold uppercase tracking-wider block">Preview Baru:</span>
+                                <div class="w-32 h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                                    <img id="preview-banner-{{ $pKey }}-img" class="w-full h-full object-cover" alt="Selected Preview">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Inputs -->
+                        <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="banner_{{ $pKey }}_file" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Unggah Gambar Baru (Maks 4MB)</label>
+                                <input type="file" name="banner_{{ $pKey }}_file" id="banner_{{ $pKey }}_file" accept="image/*"
+                                       onchange="previewImage(this, 'preview-banner-{{ $pKey }}-container', 'preview-banner-{{ $pKey }}-img'); if (this.files && this.files[0]) { document.getElementById('current-banner-{{ $pKey }}-container')?.classList.add('hidden'); } else { document.getElementById('current-banner-{{ $pKey }}-container')?.classList.remove('hidden'); }"
+                                       class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-primary/5 file:text-brand-primary hover:file:bg-brand-primary/10">
+                            </div>
+                            <div>
+                                <label for="banner_{{ $pKey }}_url" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Atau Masukkan Tautan URL Gambar</label>
+                                <input type="url" name="banner_{{ $pKey }}_url" id="banner_{{ $pKey }}_url" value="{{ old("banner_{$pKey}_url", $dbUrl) }}" placeholder="https://unsplash.com/... atau https://domain.com/img.jpg"
+                                       class="block w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 

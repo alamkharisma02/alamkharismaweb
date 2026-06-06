@@ -116,7 +116,7 @@
 
                     <a href="{{ route('projects.index') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('projects.index') || Route::is('projects.show') ? 'text-[#C5A880]' : 'text-white/90' }}">PROYEK</a>
                     <a href="{{ route('articles.index') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('articles.index') || Route::is('articles.show') ? 'text-[#C5A880]' : 'text-white/90' }}">BERITA</a>
-                    <a href="{{ route('home') }}#kontak" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent text-white/90">KONTAK</a>
+                    <a href="{{ route('contact') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('contact') ? 'text-[#C5A880]' : 'text-white/90' }}">KONTAK</a>
                 </nav>
 
                 <!-- CTA Button -->
@@ -172,7 +172,7 @@
 
                 <a href="{{ route('projects.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('projects.index') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">PROYEK</a>
                 <a href="{{ route('articles.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('articles.index') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">BERITA</a>
-                <a href="{{ route('home') }}#kontak" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors text-white/90">KONTAK</a>
+                <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('contact') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">KONTAK</a>
                 
                 <div class="pt-4 border-t border-emerald-950/80">
                     <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
@@ -208,10 +208,21 @@
                         Kami melayani jasa pengerjaan interior mewah, perancangan eksterior modern, dan konstruksi sipil umum (kontraktor) dengan standar mutu teratas sejak 2018.
                     </p>
                     <div class="flex space-x-4 pt-2">
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-brand-primary flex items-center justify-center text-slate-300 shadow transition-all duration-300"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-brand-primary flex items-center justify-center text-slate-300 shadow transition-all duration-300"><i class="fa-brands fa-instagram text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-brand-primary flex items-center justify-center text-slate-300 shadow transition-all duration-300"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-brand-primary flex items-center justify-center text-slate-300 shadow transition-all duration-300"><i class="fa-brands fa-youtube text-sm"></i></a>
+                        @if(\App\Models\Setting::get('social_facebook'))
+                            <a href="{{ \App\Models\Setting::get('social_facebook') }}" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-[#0A1E13] flex items-center justify-center text-slate-300 shadow hover:scale-110 transition-all duration-300"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_instagram'))
+                            <a href="{{ \App\Models\Setting::get('social_instagram') }}" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-[#0A1E13] flex items-center justify-center text-slate-300 shadow hover:scale-110 transition-all duration-300"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_twitter'))
+                            <a href="{{ \App\Models\Setting::get('social_twitter') }}" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-[#0A1E13] flex items-center justify-center text-slate-300 shadow hover:scale-110 transition-all duration-300"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_tiktok'))
+                            <a href="{{ \App\Models\Setting::get('social_tiktok') }}" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-[#0A1E13] flex items-center justify-center text-slate-300 shadow hover:scale-110 transition-all duration-300"><i class="fa-brands fa-tiktok text-sm"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_youtube'))
+                            <a href="{{ \App\Models\Setting::get('social_youtube') }}" target="_blank" rel="noopener" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-accent hover:text-[#0A1E13] flex items-center justify-center text-slate-300 shadow hover:scale-110 transition-all duration-300"><i class="fa-brands fa-youtube text-sm"></i></a>
+                        @endif
                     </div>
                 </div>
 

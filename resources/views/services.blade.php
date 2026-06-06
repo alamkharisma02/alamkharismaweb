@@ -8,26 +8,24 @@
     <div class="h-20 bg-[#0A1E13]"></div>
 
     <!-- Banner Header -->
-    <section class="relative bg-gradient-to-b from-[#0A1E13] via-[#050F09] to-[#0A1E13] py-24 border-b border-[#C5A880]/10 overflow-hidden text-center">
-        <!-- Background subtle glow shapes -->
-        <div class="absolute right-0 top-0 w-96 h-96 bg-[#C5A880]/8 rounded-full blur-3xl -mr-20 -mt-20 text-white"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl -ml-20 -mb-20"></div>
-        <div class="absolute inset-0 luxury-grid-pattern opacity-10"></div>
-        
-        <!-- Watermark background -->
-        <div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-overlay">
-            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&h=1080&fit=crop" class="w-full h-full object-cover" alt="Watermark bg">
-        </div>
+    <section class="relative bg-cover bg-center bg-fixed py-28 border-b border-[#C5A880]/15 overflow-hidden text-center"
+             style="background-image: url('{{ \App\Models\Setting::get('banner_services_img', 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80') }}')">
+        <!-- High-contrast dark gradient overlays -->
+        <div class="absolute inset-0 bg-[#0A1E13]/85 mix-blend-multiply z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0A1E13] via-[#0A1E13]/60 to-[#0A1E13]/85 z-0"></div>
+        <!-- Accent Glow and Pattern -->
+        <div class="absolute right-0 top-0 w-96 h-96 bg-[#C5A880]/10 rounded-full blur-3xl z-0"></div>
+        <div class="absolute inset-0 luxury-grid-pattern opacity-15 z-0"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-4 reveal-on-scroll">
             <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 uppercase tracking-widest animate-pulse-gold">
                 <i class="fa-solid fa-gears mr-1.5"></i> Layanan Kami
             </span>
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight font-serif">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight font-serif drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]">
                 Layanan Konstruksi & Interior Mewah
             </h1>
             <div class="w-20 h-[2px] bg-[#C5A880] mx-auto mt-4"></div>
-            <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-light mt-4 font-sans">
+            <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-light mt-4 font-sans drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]">
                 PT Alam Kharisma Bersaudara menyediakan solusi kontraktor bangunan, pengerjaan interior mewah, dan rekayasa sipil berstandar mutu teratas.
             </p>
         </div>

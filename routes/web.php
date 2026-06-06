@@ -25,6 +25,8 @@ Route::get('/profil', [HomeController::class, 'profile'])->name('profile');
 Route::get('/galeri', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/galeri-video', [HomeController::class, 'videoGallery'])->name('video_gallery');
 Route::get('/testimoni', [HomeController::class, 'testimonials'])->name('testimonials');
+Route::get('/kontak', [HomeController::class, 'contact'])->name('contact');
+Route::post('/kontak', [HomeController::class, 'submitContact'])->name('contact.submit');
 
 Route::get('/portofolio', [PublicProjectController::class, 'index'])->name('projects.index');
 Route::get('/portofolio/{slug}', [PublicProjectController::class, 'show'])->name('projects.show');

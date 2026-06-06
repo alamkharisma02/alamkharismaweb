@@ -53,6 +53,19 @@ class DatabaseSeeder extends Seeder
             'workflow_step3_img' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop',
             'workflow_step4_img' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop',
             'workflow_step5_img' => 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=450&fit=crop',
+            'social_facebook' => 'https://facebook.com',
+            'social_instagram' => 'https://instagram.com',
+            'social_twitter' => 'https://twitter.com',
+            'social_tiktok' => 'https://tiktok.com',
+            'social_youtube' => 'https://youtube.com',
+            'banner_profile_img' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80',
+            'banner_services_img' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80',
+            'banner_projects_img' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80',
+            'banner_gallery_img' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80',
+            'banner_video_gallery_img' => 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&q=80',
+            'banner_testimonials_img' => 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80',
+            'banner_articles_img' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80',
+            'banner_contact_img' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80',
         ];
  
         foreach ($defaultSettings as $key => $val) {

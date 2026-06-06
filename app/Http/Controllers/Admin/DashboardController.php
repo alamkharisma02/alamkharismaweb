@@ -19,11 +19,13 @@ class DashboardController extends Controller
             'projects_completed' => Project::where('status', 'Completed')->count(),
             'projects_in_progress' => Project::where('status', 'In Progress')->count(),
             'total_articles' => Article::count(),
+            'total_leads' => \App\Models\Lead::count(),
         ];
 
         $recentArticles = Article::latest()->take(5)->get();
         $recentProjects = Project::latest()->take(5)->get();
+        $recentLeads = \App\Models\Lead::latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recentArticles', 'recentProjects'));
+        return view('admin.dashboard', compact('stats', 'recentArticles', 'recentProjects', 'recentLeads'));
     }
 }

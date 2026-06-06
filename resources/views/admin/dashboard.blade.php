@@ -9,7 +9,7 @@
     </div>
 
     <!-- Quick Stats Grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <!-- Stat 1 -->
         <div class="p-6 rounded-3xl bg-white border border-slate-200/60 shadow-sm flex items-center space-x-4 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
             <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl flex-shrink-0 border border-blue-100/30">
@@ -51,6 +51,17 @@
             <div>
                 <span class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider block">Artikel</span>
                 <span class="text-2xl font-black text-slate-800 leading-none">{{ $stats['total_articles'] }}</span>
+            </div>
+        </div>
+
+        <!-- Stat 5 (Inquiries / Leads) -->
+        <div class="p-6 rounded-3xl bg-white border border-slate-200/60 shadow-sm flex items-center space-x-4 hover:shadow-md hover:-translate-y-1 transition-all duration-300 col-span-2 md:col-span-1">
+            <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl flex-shrink-0 border border-rose-100/30">
+                <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <div>
+                <span class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider block">Pesan Masuk</span>
+                <span class="text-2xl font-black text-slate-800 leading-none">{{ $stats['total_leads'] }}</span>
             </div>
         </div>
     </div>
@@ -143,9 +154,77 @@
                         </div>
                     @endforelse
                 </div>
-            </div>
         </div>
 
     </div>
+
+    <!-- Recent Inquiries Section -->
+    <div class="bg-white rounded-3xl border border-slate-200/60 shadow-sm overflow-hidden mt-8">
+        <!-- Header -->
+        <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <h3 class="font-extrabold text-slate-800 text-xs uppercase tracking-wider flex items-center">
+                <i class="fa-solid fa-envelope-open-text text-brand-accent mr-2 text-base"></i> Pesan Masuk / Inquiries Terbaru
+            </h3>
+            <span class="text-xs font-semibold text-slate-400">Menampilkan 5 Inquiries Terakhir</span>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-slate-50/70 text-slate-500 font-extrabold text-xs uppercase border-b border-slate-150">
+                    <tr>
+                        <th class="px-6 py-3.5">Nama & Kontak</th>
+                        <th class="px-6 py-3.5">Detail Rencana Proyek</th>
+                        <th class="px-6 py-3.5">Estimasi Anggaran</th>
+                        <th class="px-6 py-3.5">Pesan Konsultasi</th>
+                        <th class="px-6 py-3.5">Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    @forelse($recentLeads as $lead)
+                        <tr class="hover:bg-slate-50/60 transition-colors">
+                            <td class="px-6 py-4 space-y-0.5">
+                                <div class="font-bold text-slate-900">{{ $lead->name }}</div>
+                                <div class="text-xs text-slate-500 flex flex-col space-y-0.5">
+                                    <span><i class="fa-solid fa-phone text-[10px] mr-1 text-slate-400"></i> {{ $lead->phone }}</span>
+                                    @if($lead->email)
+                                        <span><i class="fa-solid fa-envelope text-[10px] mr-1 text-slate-400"></i> {{ $lead->email }}</span>
+                                    @endif
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-xs">
+                                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 border border-emerald-250/20 font-bold uppercase">
+                                    {{ $lead->project_type ?? 'Lainnya' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 font-mono font-bold text-xs text-slate-700">
+                                @if($lead->estimated_budget)
+                                    Rp {{ number_format($lead->estimated_budget, 0, ',', '.') }}
+                                @else
+                                    <span class="text-slate-400">-</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-600 max-w-xs leading-relaxed" title="{{ $lead->message }}">
+                                <p class="line-clamp-2 italic">{{ $lead->message ?? 'Tidak ada pesan tertulis.' }}</p>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-400 font-mono">
+                                {{ $lead->created_at->format('d/m/Y H:i') }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="px-6 py-12 text-center text-slate-400">
+                                <div class="flex flex-col items-center justify-center space-y-2 py-6">
+                                    <i class="fa-solid fa-folder-open text-3xl text-slate-300"></i>
+                                    <span class="text-sm">Belum ada pesan inquiry/leads masuk dari website.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 @endsection
