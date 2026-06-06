@@ -64,35 +64,35 @@
     </div>
 
     <!-- Header / Sticky Glassmorphism Navbar -->
+    <!-- Header / Sticky Glassmorphism Navbar -->
     <header x-data="{ mobileMenuOpen: false, isScrolled: false }" 
             x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 60 })"
-            :class="isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-slate-200/80 py-2.5' : 'bg-transparent py-4'"
+            @if(Route::is('home'))
+            :class="isScrolled ? 'bg-[#0A1E13]/95 backdrop-blur-md shadow-lg py-2.5 border-b border-emerald-950/25' : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent py-4'"
+            @else
+            class="bg-[#0A1E13] py-3.5 shadow-lg border-b border-emerald-950/25"
+            @endif
             class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="flex items-center group gap-2.5">
                     <img src="{{ asset('images/logo.png') }}" 
-                         class="h-10 sm:h-12 md:h-14 w-auto transition-all duration-300" 
-                         :class="isScrolled ? 'mix-blend-multiply' : 'brightness-0 invert'"
+                         class="h-10 sm:h-12 md:h-14 w-auto transition-all duration-300 brightness-0 invert" 
                          alt="PT Alam Kharisma Bersaudara">
                     <div class="flex flex-col leading-none">
-                        <span class="font-extrabold text-xs sm:text-sm md:text-base tracking-wider uppercase transition-colors duration-300"
-                              :class="isScrolled ? 'text-brand-primary' : 'text-white'">PT ALAM KHARISMA</span>
-                        <span class="font-bold text-[10px] sm:text-xs md:text-sm tracking-[0.25em] uppercase transition-colors duration-300"
-                              :class="isScrolled ? 'text-brand-accent' : 'text-[#C5A880]'">BERSAUDARA</span>
+                        <span class="font-extrabold text-xs sm:text-sm md:text-base tracking-wider uppercase text-white">PT ALAM KHARISMA</span>
+                        <span class="font-bold text-[10px] sm:text-xs md:text-sm tracking-[0.25em] uppercase text-[#C5A880]">BERSAUDARA</span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex items-center space-x-8" x-data="{ openTentang: false }">
-                    <a href="{{ route('home') }}" class="text-sm font-semibold hover:text-brand-accent transition-colors duration-300"
-                       :class="isScrolled ? '{{ Route::is('home') ? 'text-brand-accent' : 'text-brand-primary' }}' : '{{ Route::is('home') ? 'text-[#C5A880]' : 'text-white/90 hover:text-white' }}'">BERANDA</a>
+                    <a href="{{ route('home') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('home') ? 'text-[#C5A880]' : 'text-white/90' }}">BERANDA</a>
                     
                     <!-- Dropdown Tentang Kami -->
                     <div class="relative" @mouseenter="openTentang = true" @mouseleave="openTentang = false">
-                        <button class="inline-flex items-center text-sm font-semibold hover:text-brand-accent transition-colors duration-300 focus:outline-none cursor-pointer"
-                                :class="isScrolled ? '{{ Route::is('profile') || Route::is('gallery') || Route::is('video_gallery') || Route::is('testimonials') ? 'text-brand-accent' : 'text-brand-primary' }}' : '{{ Route::is('profile') || Route::is('gallery') || Route::is('video_gallery') || Route::is('testimonials') ? 'text-[#C5A880]' : 'text-white/90' }}'">
+                        <button class="inline-flex items-center text-sm font-semibold transition-colors duration-300 hover:text-brand-accent focus:outline-none cursor-pointer {{ Route::is('profile') || Route::is('gallery') || Route::is('video_gallery') || Route::is('testimonials') ? 'text-[#C5A880]' : 'text-white/90' }}">
                             TENTANG KAMI
                             <i class="fa-solid fa-chevron-down ml-1 text-xs transition-transform duration-200" :class="openTentang ? 'rotate-180' : ''"></i>
                         </button>
@@ -104,30 +104,26 @@
                              x-transition:leave="transition ease-in duration-100"
                              x-transition:leave-start="opacity-100 scale-100"
                              x-transition:leave-end="opacity-0 scale-95"
-                             class="absolute left-0 mt-2 w-48 rounded-xl bg-white border border-slate-200 shadow-xl py-2 z-50"
+                             class="absolute left-0 mt-2 w-48 rounded-xl bg-[#0A1E13] border border-emerald-950 shadow-2xl py-2 z-50"
                              style="display: none;">
-                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-brand-primary hover:bg-slate-50 hover:text-brand-accent transition-colors">Profil Kami</a>
-                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-brand-primary hover:bg-slate-50 hover:text-brand-accent transition-colors">Gallery</a>
-                            <a href="{{ route('video_gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-brand-primary hover:bg-slate-50 hover:text-brand-accent transition-colors">Video Gallery</a>
-                            <a href="{{ route('testimonials') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-brand-primary hover:bg-slate-50 hover:text-brand-accent transition-colors">Testimonial</a>
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Profil Kami</a>
+                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Gallery</a>
+                            <a href="{{ route('video_gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Video Gallery</a>
+                            <a href="{{ route('testimonials') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Testimonial</a>
                         </div>
                     </div>
 
-                    <a href="{{ route('projects.index') }}" class="text-sm font-semibold hover:text-brand-accent transition-colors duration-300"
-                       :class="isScrolled ? '{{ Route::is('projects.index') || Route::is('projects.show') ? 'text-brand-accent' : 'text-brand-primary' }}' : '{{ Route::is('projects.index') || Route::is('projects.show') ? 'text-[#C5A880]' : 'text-white/90' }}'">PROYEK</a>
-                    <a href="{{ route('articles.index') }}" class="text-sm font-semibold hover:text-brand-accent transition-colors duration-300"
-                       :class="isScrolled ? '{{ Route::is('articles.index') || Route::is('articles.show') ? 'text-brand-accent' : 'text-brand-primary' }}' : '{{ Route::is('articles.index') || Route::is('articles.show') ? 'text-[#C5A880]' : 'text-white/90' }}'">BERITA</a>
-                    <a href="{{ route('home') }}#kontak" class="text-sm font-semibold hover:text-brand-accent transition-colors duration-300"
-                       :class="isScrolled ? 'text-brand-primary' : 'text-white/90'">KONTAK</a>
+                    <a href="{{ route('projects.index') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('projects.index') || Route::is('projects.show') ? 'text-[#C5A880]' : 'text-white/90' }}">PROYEK</a>
+                    <a href="{{ route('articles.index') }}" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent {{ Route::is('articles.index') || Route::is('articles.show') ? 'text-[#C5A880]' : 'text-white/90' }}">BERITA</a>
+                    <a href="{{ route('home') }}#kontak" class="text-sm font-semibold transition-colors duration-300 hover:text-brand-accent text-white/90">KONTAK</a>
                 </nav>
 
                 <!-- CTA Button -->
                 <div class="hidden md:block">
                     <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
                        target="_blank"
-                       class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-bold text-sm hover:scale-105 active:scale-95 transition-all duration-300 shadow-md"
-                       :class="isScrolled ? 'bg-brand-primary text-white border border-brand-accent/25 shadow-brand-primary/10' : 'bg-[#C5A880] text-[#0A1E13] border border-[#C5A880]/50 shadow-[#C5A880]/20 hover:bg-[#E2D2BC]'">
-                        <i class="fa-brands fa-whatsapp text-lg mr-2" :class="isScrolled ? 'text-brand-accent' : 'text-[#0A1E13]'"></i>
+                       class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-[#C5A880] to-[#B4966B] hover:from-[#B4966B] hover:to-[#A3855A] text-[#0A1E13] hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shadow-[#C5A880]/15 border border-[#C5A880]/20">
+                        <i class="fa-brands fa-whatsapp text-lg mr-2 text-[#0A1E13]"></i>
                         Konsultasi Gratis
                     </a>
                 </div>
@@ -135,8 +131,7 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="hover:text-brand-accent focus:outline-none transition-colors duration-300"
-                            :class="isScrolled ? 'text-brand-primary' : 'text-white'"
+                            class="text-white hover:text-[#C5A880] focus:outline-none transition-colors duration-300"
                             aria-label="Toggle menu">
                         <i class="fa-solid text-2xl" :class="mobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
                     </button>
@@ -152,36 +147,36 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-4"
-             class="md:hidden bg-white border-b border-slate-200 absolute top-full left-0 right-0 py-4 shadow-xl"
+             class="md:hidden bg-[#0A1E13] border-b border-emerald-950/80 absolute top-full left-0 right-0 py-4 shadow-2xl"
              x-data="{ mobTentangOpen: false }">
             <div class="px-4 space-y-3">
-                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors {{ Route::is('home') ? 'text-brand-accent bg-slate-50' : 'text-brand-primary' }}">BERANDA</a>
+                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('home') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">BERANDA</a>
                 
                 <!-- Mobile Dropdown Trigger -->
                 <div>
                     <button @click="mobTentangOpen = !mobTentangOpen" 
-                            class="w-full flex justify-between items-center px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary">
+                            class="w-full flex justify-between items-center px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors text-white/90">
                         <span>TENTANG KAMI</span>
                         <i class="fa-solid fa-chevron-down text-sm transition-transform duration-200" :class="mobTentangOpen ? 'rotate-180' : ''"></i>
                     </button>
                     <!-- Mobile Submenu -->
                     <div x-show="mobTentangOpen" x-collapse class="pl-6 space-y-2 mt-2" style="display: none;">
-                        <a href="{{ route('profile') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary/80">Profil Kami</a>
-                        <a href="{{ route('gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary/80">Gallery</a>
-                        <a href="{{ route('video_gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary/80">Video Gallery</a>
-                        <a href="{{ route('testimonials') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary/80">Testimonial</a>
+                        <a href="{{ route('profile') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Profil Kami</a>
+                        <a href="{{ route('gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Gallery</a>
+                        <a href="{{ route('video_gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Video Gallery</a>
+                        <a href="{{ route('testimonials') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Testimonial</a>
                     </div>
                 </div>
 
-                <a href="{{ route('projects.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors {{ Route::is('projects.index') ? 'text-brand-accent bg-slate-50' : 'text-brand-primary' }}">PROYEK</a>
-                <a href="{{ route('articles.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors {{ Route::is('articles.index') ? 'text-brand-accent bg-slate-50' : 'text-brand-primary' }}">BERITA</a>
-                <a href="{{ route('home') }}#kontak" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-slate-50 hover:text-brand-accent transition-colors text-brand-primary">KONTAK</a>
+                <a href="{{ route('projects.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('projects.index') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">PROYEK</a>
+                <a href="{{ route('articles.index') }}" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors {{ Route::is('articles.index') ? 'text-[#C5A880] bg-emerald-950/40' : 'text-white/90' }}">BERITA</a>
+                <a href="{{ route('home') }}#kontak" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-lg text-base font-semibold hover:bg-emerald-950/60 hover:text-[#C5A880] transition-colors text-white/90">KONTAK</a>
                 
-                <div class="pt-4 border-t border-slate-200">
+                <div class="pt-4 border-t border-emerald-950/80">
                     <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" 
                        target="_blank"
-                       class="w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-brand-primary text-white font-bold text-base hover:bg-brand-primary-hover transition-colors shadow-md">
-                        <i class="fa-brands fa-whatsapp text-xl mr-2 text-brand-accent"></i>
+                       class="w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-[#C5A880] to-[#B4966B] hover:from-[#B4966B] hover:to-[#A3855A] text-[#0A1E13] font-bold text-base transition-colors shadow-md shadow-[#C5A880]/15">
+                        <i class="fa-brands fa-whatsapp text-xl mr-2 text-[#0A1E13]"></i>
                         Konsultasi WhatsApp
                     </a>
                 </div>

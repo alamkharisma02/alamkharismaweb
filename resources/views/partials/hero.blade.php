@@ -94,12 +94,22 @@
                 <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
                     @php
                         $heroTitle = \App\Models\Setting::get('hero_title', 'Mewujudkan Interior Mewah & Konstruksi Sipil Presisi');
-                        $parts = explode('&', $heroTitle, 2);
-                        $mainPart = $parts[0] ?? 'Mewujudkan Interior Mewah ';
-                        $highlightPart = isset($parts[1]) ? '& ' . $parts[1] : 'Konstruksi Sipil Presisi';
+                        $hasAmp = strpos($heroTitle, '&') !== false;
+                        if ($hasAmp) {
+                            $parts = explode('&', $heroTitle, 2);
+                            $mainPart = trim($parts[0]);
+                            $highlightPart = '& ' . trim($parts[1]);
+                        } else {
+                            $mainPart = $heroTitle;
+                            $highlightPart = '';
+                        }
                     @endphp
-                    <span class="block font-serif opacity-0 animate-[fadeInUp_1s_0.3s_cubic-bezier(0.16,1,0.3,1)_forwards]">{{ $mainPart }}</span>
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#C5A880] via-[#E2D2BC] to-[#B4966B] font-serif italic opacity-0 animate-[fadeInUp_1s_0.6s_cubic-bezier(0.16,1,0.3,1)_forwards]">{{ $highlightPart }}</span>
+                    @if($highlightPart)
+                        <span class="block font-serif opacity-0 animate-[fadeInUp_1s_0.3s_cubic-bezier(0.16,1,0.3,1)_forwards]">{{ $mainPart }}</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#C5A880] via-[#E2D2BC] to-[#B4966B] font-serif italic opacity-0 animate-[fadeInUp_1s_0.6s_cubic-bezier(0.16,1,0.3,1)_forwards]">{{ $highlightPart }}</span>
+                    @else
+                        <span class="block font-serif opacity-0 animate-[fadeInUp_1s_0.3s_cubic-bezier(0.16,1,0.3,1)_forwards]">{{ $mainPart }}</span>
+                    @endif
                 </h1>
                 
                 <!-- Subtitle -->

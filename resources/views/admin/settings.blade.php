@@ -228,7 +228,7 @@
                             </div>
                             <div>
                                 <label for="workflow_step{{ $i }}_url" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Atau Masukkan Tautan URL Gambar</label>
-                                <input type="url" name="workflow_step{{ $i }}_url" id="workflow_step{{ $i }}_url" placeholder="https://unsplash.com/... atau https://domain.com/img.jpg"
+                                <input type="url" name="workflow_step{{ $i }}_url" id="workflow_step{{ $i }}_url" value="{{ old("workflow_step{$i}_url", $settings["workflow_step{$i}_url"]) }}" placeholder="https://unsplash.com/... atau https://domain.com/img.jpg"
                                        class="block w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-accent">
                             </div>
                         </div>
@@ -240,10 +240,11 @@
         <!-- Form Submit -->
         <div class="flex justify-end pt-2">
             <button type="submit" 
-                    class="px-8 py-3.5 rounded-xl bg-brand-accent hover:bg-brand-accent-hover text-slate-950 font-extrabold text-sm transition-all shadow-md shadow-brand-accent/10 cursor-pointer">
+                    class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#C5A880] to-[#B4966B] hover:from-[#B4966B] hover:to-[#A3855A] text-[#0A1E13] font-black text-sm uppercase tracking-wider hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shadow-[#C5A880]/20 cursor-pointer">
                 Simpan Semua Pengaturan
             </button>
         </div>
     </form>
 </div>
 @endsection
+

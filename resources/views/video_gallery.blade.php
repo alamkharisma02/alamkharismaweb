@@ -5,7 +5,7 @@
 
 @section('content')
     <!-- Banner Space Filler -->
-    <div class="h-20 bg-slate-950"></div>
+    <div class="h-20 bg-[#0A1E13]"></div>
 
     <!-- Header Section -->
     <section class="relative bg-slate-50 py-16 border-b border-slate-200 overflow-hidden">
