@@ -30,6 +30,7 @@ class SettingController extends Controller
             'legal_nib' => Setting::get('legal_nib'),
             'legal_siujk' => Setting::get('legal_siujk'),
             'company_established_year' => Setting::get('company_established_year', '2018'),
+            'stat_completed_projects' => Setting::get('stat_completed_projects', '130'),
             'company_about_us_title' => Setting::get('company_about_us_title'),
             'company_about_us_text' => Setting::get('company_about_us_text'),
             
@@ -96,6 +97,7 @@ class SettingController extends Controller
             'legal_nib' => 'required|string|max:50',
             'legal_siujk' => 'required|string|max:50',
             'company_established_year' => 'required|integer|min:1900|max:2100',
+            'stat_completed_projects' => 'required|integer|min:0',
             'company_about_us_title' => 'required|string|max:255',
             'company_about_us_text' => 'required|string',
             
@@ -141,8 +143,8 @@ class SettingController extends Controller
             'site_name', 'site_tagline', 'hero_title', 'hero_subtitle', 'hero_video_url',
             'featured_video_url', 'featured_video_title', 'featured_video_subtitle',
             'contact_whatsapp', 'contact_phone', 'contact_email', 'contact_address', 'contact_map_iframe',
-            'legal_nib', 'legal_siujk', 'company_established_year', 'company_about_us_title',
-            'company_about_us_text',
+            'legal_nib', 'legal_siujk', 'company_established_year', 'stat_completed_projects',
+            'company_about_us_title', 'company_about_us_text',
             
             // Social Media
             'social_facebook', 'social_instagram', 'social_twitter', 'social_tiktok', 'social_youtube'

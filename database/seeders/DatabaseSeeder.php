@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             'legal_nib' => '1234567890123',
             'legal_siujk' => '912/SIUJK/2024',
             'company_established_year' => '2018',
+            'stat_completed_projects' => '130',
             'company_about_us_title' => 'Membangun dengan Hati, Merancang dengan Presisi',
             'company_about_us_text' => 'Didirikan pada tahun 2018, PT Alam Kharisma Bersaudara hadir sebagai solusi terintegrasi untuk kebutuhan konstruksi bangunan, rancangan desain eksterior fasad, hingga pengerjaan detail interior (fit-out). Kami berkomitmen tinggi untuk memberikan hasil kerja yang presisi, penggunaan material berkualitas tinggi, anggaran belanja yang transparan, serta ketepatan waktu demi kepuasan klien kami.',
             'workflow_step1_img' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop',
@@ -69,7 +70,7 @@ class DatabaseSeeder extends Seeder
         ];
  
         foreach ($defaultSettings as $key => $val) {
-            \App\Models\Setting::updateOrCreate(['key' => $key], ['value' => $val]);
+            \App\Models\Setting::firstOrCreate(['key' => $key], ['value' => $val]);
         }
  
         // 2. Create Projects - using Unsplash direct image URLs (reliable)
@@ -128,7 +129,7 @@ class DatabaseSeeder extends Seeder
  
         foreach ($projects as $proj) {
             $proj['slug'] = Str::slug($proj['title']);
-            Project::updateOrCreate(['slug' => $proj['slug']], $proj);
+            Project::firstOrCreate(['slug' => $proj['slug']], $proj);
         }
  
         // 4. Create Articles - using Unsplash direct image URLs
@@ -164,7 +165,7 @@ class DatabaseSeeder extends Seeder
  
         foreach ($articles as $art) {
             $art['slug'] = Str::slug($art['title']);
-            Article::updateOrCreate(['slug' => $art['slug']], $art);
+            Article::firstOrCreate(['slug' => $art['slug']], $art);
         }
  
         // 5. Create Mock Leads

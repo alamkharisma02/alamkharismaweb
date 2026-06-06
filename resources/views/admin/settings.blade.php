@@ -45,11 +45,17 @@
             <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-100 pb-2.5">
                 <i class="fa-solid fa-building text-brand-accent mr-2"></i> Profil Perusahaan (Tentang Kami)
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                 <div class="sm:col-span-1">
                     <label for="company_established_year" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tahun Berdiri*</label>
                     <input type="number" name="company_established_year" id="company_established_year" value="{{ old('company_established_year', $settings['company_established_year']) }}" required min="1900" max="2100"
                            class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+                <div class="sm:col-span-1">
+                    <label for="stat_completed_projects" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Jumlah Proyek Selesai*</label>
+                    <input type="number" name="stat_completed_projects" id="stat_completed_projects" value="{{ old('stat_completed_projects', $settings['stat_completed_projects'] ?? '130') }}" required min="0"
+                           class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                    <p class="text-[10px] text-slate-400 mt-1">*Angka ini tampil di hero beranda (misal: 130+).</p>
                 </div>
                 <div class="sm:col-span-2">
                     <label for="company_about_us_title" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Judul Utama Profil*</label>
