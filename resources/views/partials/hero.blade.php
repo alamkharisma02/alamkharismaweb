@@ -79,7 +79,7 @@
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-950/15 rounded-full blur-[80px] -ml-40 -mb-40 z-[2]"></div>
 
     <!-- ===== HERO CONTENT ===== -->
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full pt-32 pb-24">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full pt-24 sm:pt-32 pb-20 sm:pb-24">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <!-- Left: Main Text Content -->
             <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
@@ -91,7 +91,7 @@
                 </div>
                 
                 <!-- Main Heading with Typewriter Reveal -->
-                <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                     @php
                         $heroTitle = \App\Models\Setting::get('hero_title', 'Mewujudkan Interior Mewah & Konstruksi Sipil Presisi');
                         $hasAmp = strpos($heroTitle, '&') !== false;
@@ -113,39 +113,39 @@
                 </h1>
                 
                 <!-- Subtitle -->
-                <p class="text-slate-300/90 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-sans font-light opacity-0 animate-[fadeInUp_1s_0.9s_cubic-bezier(0.16,1,0.3,1)_forwards]">
+                <p class="text-slate-300/90 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-sans font-light opacity-0 animate-[fadeInUp_1s_0.9s_cubic-bezier(0.16,1,0.3,1)_forwards]">
                     {{ \App\Models\Setting::get('hero_subtitle', 'PT Alam Kharisma Bersaudara menghadirkan rancangan konstruksi sipil premium, interior mewah, dan eksterior ikonik dengan keahlian presisi serta komitmen RAB transparan.') }}
                 </p>
                 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2 opacity-0 animate-[fadeInUp_1s_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">
                     <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('contact_whatsapp', '628123456789') }}&text=Halo%20{{ urlencode(\App\Models\Setting::get('site_name', 'PT Alam Kharisma Bersaudara')) }}%2C%20saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20berdiskusi%20lebih%20lanjut%3F" target="_blank" 
-                       class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-[#C5A880] to-[#B4966B] hover:from-[#B4966B] hover:to-[#A3855A] text-[#0A1E13] font-bold text-base transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-[#C5A880]/25 active:translate-y-0 cursor-pointer tracking-wider uppercase">
+                       class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-[#C5A880] to-[#B4966B] hover:from-[#B4966B] hover:to-[#A3855A] text-[#0A1E13] font-bold text-sm sm:text-base transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-[#C5A880]/25 active:translate-y-0 cursor-pointer tracking-wider uppercase">
                         <i class="fa-brands fa-whatsapp text-xl mr-2"></i>
                         Konsultasi Gratis
                     </a>
                     <a href="{{ route('projects.index') }}" 
-                       class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white/5 text-white font-bold text-base hover:bg-white/10 border border-white/20 hover:border-[#C5A880]/60 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 cursor-pointer tracking-wider uppercase backdrop-blur-sm">
+                       class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 rounded-xl bg-white/5 text-white font-bold text-sm sm:text-base hover:bg-white/10 border border-white/20 hover:border-[#C5A880]/60 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 cursor-pointer tracking-wider uppercase backdrop-blur-sm">
                         <i class="fa-solid fa-briefcase mr-2 text-[#C5A880]"></i>
                         Lihat Portofolio
                     </a>
                 </div>
 
                 <!-- Trust Stats -->
-                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0 opacity-0 animate-[fadeInUp_1s_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]">
+                <div class="grid grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0 opacity-0 animate-[fadeInUp_1s_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]">
                     <div class="text-center lg:text-left">
                         @php $projectCount = (int) \App\Models\Setting::get('stat_completed_projects', 130); @endphp
-                        <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif" x-data="{ count: 0 }" x-intersect.once="let i = setInterval(() => { count++; if(count >= {{ $projectCount }}) clearInterval(i) }, 12)">
+                        <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#C5A880] font-serif" x-data="{ count: 0 }" x-intersect.once="let i = setInterval(() => { count++; if(count >= {{ $projectCount }}) clearInterval(i) }, 12)">
                             <span x-text="count">{{ $projectCount }}</span>+
                         </p>
                         <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Proyek Selesai</p>
                     </div>
                     <div class="text-center lg:text-left">
-                        <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif">100%</p>
+                        <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#C5A880] font-serif">100%</p>
                         <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">RAB Transparan</p>
                     </div>
                     <div class="text-center lg:text-left">
-                        <p class="text-3xl sm:text-4xl font-extrabold text-[#C5A880] font-serif">{{ date('Y') - \App\Models\Setting::get('company_established_year', 2018) }}+</p>
+                        <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#C5A880] font-serif">{{ date('Y') - \App\Models\Setting::get('company_established_year', 2018) }}+</p>
                         <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Tahun Pengalaman</p>
                     </div>
                 </div>

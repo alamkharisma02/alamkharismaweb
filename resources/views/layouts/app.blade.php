@@ -93,7 +93,7 @@
                     
                     <!-- Dropdown Tentang Kami -->
                     <div class="relative" @mouseenter="openTentang = true" @mouseleave="openTentang = false">
-                        <button class="inline-flex items-center text-sm font-semibold transition-colors duration-300 hover:text-brand-accent focus:outline-none cursor-pointer {{ Route::is('profile') || Route::is('gallery') || Route::is('video_gallery') || Route::is('testimonials') ? 'text-[#C5A880]' : 'text-white/90' }}">
+                        <button class="inline-flex items-center text-sm font-semibold transition-colors duration-300 hover:text-brand-accent focus:outline-none cursor-pointer {{ Route::is('profile') || Route::is('video_gallery') || Route::is('testimonials') ? 'text-[#C5A880]' : 'text-white/90' }}">
                             TENTANG KAMI
                             <i class="fa-solid fa-chevron-down ml-1 text-xs transition-transform duration-200" :class="openTentang ? 'rotate-180' : ''"></i>
                         </button>
@@ -108,7 +108,6 @@
                              class="absolute left-0 mt-2 w-48 rounded-xl bg-[#0A1E13] border border-emerald-950 shadow-2xl py-2 z-50"
                              style="display: none;">
                             <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Profil Kami</a>
-                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Gallery</a>
                             <a href="{{ route('video_gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Video Gallery</a>
                             <a href="{{ route('testimonials') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Testimonial</a>
                         </div>
@@ -164,7 +163,6 @@
                     <!-- Mobile Submenu -->
                     <div x-show="mobTentangOpen" x-collapse class="pl-6 space-y-2 mt-2" style="display: none;">
                         <a href="{{ route('profile') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Profil Kami</a>
-                        <a href="{{ route('gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Gallery</a>
                         <a href="{{ route('video_gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Video Gallery</a>
                         <a href="{{ route('testimonials') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Testimonial</a>
                     </div>

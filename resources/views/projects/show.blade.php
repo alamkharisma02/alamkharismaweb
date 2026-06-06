@@ -92,9 +92,9 @@
                             </h2>
                             <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#C5A880]/15 border border-white/10 w-full aspect-video bg-black">
                                 <iframe class="absolute top-0 left-0 w-full h-full border-0" 
-                                        src="{{ $projectVideoUrl }}" 
+                                        src="{{ $projectVideoUrl }}?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&color=white" 
                                         title="Project Video Footage" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                         allowfullscreen>
                                 </iframe>
                             </div>

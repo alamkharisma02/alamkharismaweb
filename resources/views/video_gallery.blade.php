@@ -104,8 +104,8 @@
                         </template>
                         <template x-if="activeVideoUrl && !activeVideoIsLocal">
                             <iframe class="absolute top-0 left-0 w-full h-full border-0" 
-                                    :src="activeVideoUrl" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    :src="activeVideoUrl + (activeVideoUrl.includes('?') ? '&' : '?') + 'rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&color=white'" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     allowfullscreen>
                             </iframe>
                         </template>

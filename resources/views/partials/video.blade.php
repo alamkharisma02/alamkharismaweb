@@ -39,7 +39,7 @@
             <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 uppercase tracking-widest animate-pulse-gold">
                 <i class="fa-solid fa-circle-play mr-2"></i> Dokumentasi Lapangan
             </span>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-serif">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif">
                 Dokumentasi Proyek &amp; Hasil Kerja
             </h2>
             <div class="w-20 h-[2px] bg-[#C5A880] mx-auto"></div>
@@ -64,12 +64,12 @@
                                        playsinline>
                                 </video>
                             </template>
-                            <!-- YouTube Embed -->
+                            <!-- YouTube Embed - Clean Player -->
                             <template x-if="!proj.is_local">
                                 <iframe class="w-full h-full border-0" 
-                                        :src="proj.video_url + '?rel=0&showinfo=0&controls=1'" 
+                                        :src="proj.video_url + '?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=0&fs=1&color=white'" 
                                         :title="proj.title" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                         allowfullscreen>
                                 </iframe>
                             </template>
@@ -80,14 +80,14 @@
                 <!-- Left Navigation Arrow -->
                 <button @click="activeIdx = activeIdx > 0 ? activeIdx - 1 : projects.length - 1"
                         x-show="projects.length > 1"
-                        class="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
+                        class="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
                     <i class="fa-solid fa-chevron-left text-lg"></i>
                 </button>
 
                 <!-- Right Navigation Arrow -->
                 <button @click="activeIdx = activeIdx < projects.length - 1 ? activeIdx + 1 : 0"
                         x-show="projects.length > 1"
-                        class="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
+                        class="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
                     <i class="fa-solid fa-chevron-right text-lg"></i>
                 </button>
             </div>
