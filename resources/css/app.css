@@ -100,6 +100,26 @@
     background-size: 24px 24px;
 }
  
+/* PLN-inspired Ken Burns zoom effect for hero slides */
+@keyframes ken-burns-zoom {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        transform: scale(1.15) translate(-1%, -1%);
+    }
+}
+
+/* Slide progress bar animation */
+@keyframes slideProgress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 /* Shimmer placeholder effect */
 .shimmer-bg {
     position: relative;
