@@ -49,6 +49,20 @@
             font-family: 'Cormorant Garamond', Georgia, serif;
         }
     </style>
+    <!-- Plyr Video Player CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <style>
+        .plyr {
+            --plyr-color-main: var(--color-brand-accent, #C5A880);
+            --plyr-video-background: #000;
+            border-radius: 1.5rem;
+        }
+        /* Disable pointer events on the iframe itself so users can't click to reveal YT watermark */
+        .plyr__video-embed iframe {
+            pointer-events: none;
+        }
+    </style>
     @yield('styles')
 </head>
 <body class="bg-[#F9F7F3] text-emerald-900 selection:bg-brand-primary selection:text-white overflow-x-hidden">

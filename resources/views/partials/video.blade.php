@@ -82,19 +82,23 @@
                                 <template x-if="proj.is_local">
                                     <video class="w-full h-full object-cover" 
                                            :src="proj.video_url" 
-                                           controls 
+                                           playsinline
                                            autoplay
-                                           playsinline>
+                                           controls
+                                           x-init="new Plyr($el, { autoplay: true, controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'] })">
                                     </video>
                                 </template>
                                 <!-- YouTube Embed - Clean Autoplay Player -->
                                 <template x-if="!proj.is_local">
-                                    <iframe class="w-full h-full border-0" 
-                                            :src="proj.video_url + '?autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=0&fs=1&color=white'" 
-                                            :title="proj.title" 
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                            allowfullscreen>
-                                    </iframe>
+                                    <div class="plyr__video-embed w-full h-full"
+                                         x-init="new Plyr($el, { autoplay: true, controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'] })">
+                                        <iframe :src="proj.video_url + '?autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=1&color=white&controls=0&enablejsapi=1'" 
+                                                :title="proj.title" 
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                allowfullscreen
+                                                allowtransparency>
+                                        </iframe>
+                                    </div>
                                 </template>
                             </div>
                         </div>

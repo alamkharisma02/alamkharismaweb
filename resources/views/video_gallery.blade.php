@@ -126,17 +126,21 @@
                             <template x-if="activeVideoIsLocal">
                                 <video class="absolute top-0 left-0 w-full h-full border-0 object-cover" 
                                        :src="activeVideoUrl" 
-                                       controls 
+                                       playsinline
                                        autoplay
-                                       playsinline>
+                                       controls
+                                       x-init="new Plyr($el, { autoplay: true, controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'] })">
                                 </video>
                             </template>
                             <template x-if="!activeVideoIsLocal">
-                                <iframe class="absolute top-0 left-0 w-full h-full border-0" 
-                                        :src="activeVideoUrl + (activeVideoUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&color=white'" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                        allowfullscreen>
-                                </iframe>
+                                <div class="plyr__video-embed w-full h-full"
+                                     x-init="new Plyr($el, { autoplay: true, controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'] })">
+                                    <iframe :src="activeVideoUrl + (activeVideoUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=1&color=white&controls=0&enablejsapi=1'" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen
+                                            allowtransparency>
+                                    </iframe>
+                                </div>
                             </template>
                         </div>
                         
