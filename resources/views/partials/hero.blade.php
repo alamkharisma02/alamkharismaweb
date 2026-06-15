@@ -173,7 +173,7 @@
                 <!-- Main Heading (Modern Sans-Serif Plus Jakarta Sans with Gold Gradient & Large Font Size) -->
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] lg:leading-[1.05]">
                     @php
-                        $heroTitle = \App\Models\Setting::get('hero_title', 'Mewujudkan Interior Mewah & Konstruksi Sipil Presisi');
+                        $heroTitle = \App\Models\Setting::get('hero_title', 'Mewujudkan Interior Mewah & Konstruksi Sipil Terbaik');
                         $hasAmp = strpos($heroTitle, '&') !== false;
                         if ($hasAmp) {
                             $parts = explode('&', $heroTitle, 2);
