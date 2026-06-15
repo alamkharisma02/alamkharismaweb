@@ -5,20 +5,26 @@
             $isLocal = $p->is_local;
             $videoUrl = $p->video_url;
             $embedUrl = $videoUrl;
+            $youtubeId = '';
             
             if (!$isLocal) {
                 // Convert standard watch link to secure embed link
                 if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $videoUrl, $match)) {
+                    $youtubeId = $match[1];
                     $embedUrl = "https://www.youtube.com/embed/" . $match[1];
                 }
             } else {
                 $embedUrl = $p->play_url;
             }
             
+            // Generate a high-res cover thumbnail URL
+            $thumbnailUrl = $youtubeId ? "https://img.youtube.com/vi/{$youtubeId}/hqdefault.jpg" : asset('images/projects/pertamina-ep-zona4.jpg');
+            
             return [
                 'title' => $p->title,
                 'description' => $p->description ?? '',
                 'video_url' => $embedUrl,
+                'thumbnail_url' => $thumbnailUrl,
                 'is_local' => $isLocal,
             ];
         });
@@ -27,6 +33,7 @@
     <section class="py-24 bg-[#0A1E13] text-white relative overflow-hidden border-t border-[#C5A880]/15"
              x-data="{ 
                  activeIdx: 0,
+                 isPlaying: false,
                  projects: {{ json_encode($formattedVideoProjects) }}
              }">
         <!-- Luxury Grid Pattern & Ambient Light -->
@@ -56,36 +63,53 @@
                 <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border border-[#C5A880]/40 bg-black aspect-video w-full transition-all duration-500 z-10">
                     <template x-for="(proj, idx) in projects" :key="idx">
                         <div x-show="activeIdx === idx" class="w-full h-full">
-                            <!-- Local Video Player -->
-                            <template x-if="proj.is_local">
-                                <video class="w-full h-full object-cover" 
-                                       :src="proj.video_url" 
-                                       controls 
-                                       playsinline>
-                                </video>
-                            </template>
-                            <!-- YouTube Embed - Clean Player -->
-                            <template x-if="!proj.is_local">
-                                <iframe class="w-full h-full border-0" 
-                                        :src="proj.video_url + '?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=0&fs=1&color=white'" 
-                                        :title="proj.title" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                        allowfullscreen>
-                                </iframe>
-                            </template>
+                            <!-- Show Cover Image with Pulsing Gold Play Button when not playing -->
+                            <div x-show="!isPlaying" class="w-full h-full cursor-pointer relative group" @click="isPlaying = true">
+                                <img :src="proj.thumbnail_url" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="cover">
+                                <div class="absolute inset-0 bg-black/45 group-hover:bg-black/60 transition-colors duration-300 flex flex-col items-center justify-center">
+                                    <!-- Premium Custom Pulsing Play Button -->
+                                    <div class="w-20 h-20 rounded-full bg-[#C5A880] text-[#0A1E13] flex items-center justify-center text-2xl shadow-2xl group-hover:scale-110 active:scale-95 transition-all duration-300 relative">
+                                        <i class="fa-solid fa-play ml-1"></i>
+                                        <span class="absolute -inset-3 rounded-full bg-[#C5A880]/30 animate-ping"></span>
+                                    </div>
+                                    <span class="text-xs text-white font-bold tracking-widest uppercase mt-4 opacity-80 group-hover:opacity-100 transition-opacity">Putar Dokumentasi</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Show Video Player/Iframe when playing -->
+                            <div x-show="isPlaying" class="w-full h-full">
+                                <!-- Local Video Player -->
+                                <template x-if="proj.is_local">
+                                    <video class="w-full h-full object-cover" 
+                                           :src="proj.video_url" 
+                                           controls 
+                                           autoplay
+                                           playsinline>
+                                    </video>
+                                </template>
+                                <!-- YouTube Embed - Clean Autoplay Player -->
+                                <template x-if="!proj.is_local">
+                                    <iframe class="w-full h-full border-0" 
+                                            :src="proj.video_url + '?autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=0&fs=1&color=white'" 
+                                            :title="proj.title" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </template>
+                            </div>
                         </div>
                     </template>
                 </div>
 
                 <!-- Left Navigation Arrow -->
-                <button @click="activeIdx = activeIdx > 0 ? activeIdx - 1 : projects.length - 1"
+                <button @click="activeIdx = activeIdx > 0 ? activeIdx - 1 : projects.length - 1; isPlaying = false"
                         x-show="projects.length > 1"
                         class="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
                     <i class="fa-solid fa-chevron-left text-lg"></i>
                 </button>
 
                 <!-- Right Navigation Arrow -->
-                <button @click="activeIdx = activeIdx < projects.length - 1 ? activeIdx + 1 : 0"
+                <button @click="activeIdx = activeIdx < projects.length - 1 ? activeIdx + 1 : 0; isPlaying = false"
                         x-show="projects.length > 1"
                         class="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A1E13] text-white hover:text-[#C5A880] flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 z-20 cursor-pointer border border-[#C5A880]/30 hover:border-[#C5A880]">
                     <i class="fa-solid fa-chevron-right text-lg"></i>
@@ -105,7 +129,7 @@
                 <!-- Indicators -->
                 <div class="flex justify-center items-center gap-2" x-show="projects.length > 1">
                     <template x-for="(proj, idx) in projects" :key="idx">
-                        <button @click="activeIdx = idx" 
+                        <button @click="activeIdx = idx; isPlaying = false" 
                                 :class="activeIdx === idx ? 'w-8 bg-[#C5A880]' : 'w-2 bg-white/20 hover:bg-white/40'"
                                 class="h-2 rounded-full transition-all duration-300 cursor-pointer">
                         </button>

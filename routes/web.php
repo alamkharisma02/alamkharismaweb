@@ -52,8 +52,7 @@ Route::get('/run-migration', function () {
             }
         }
 
-        \Artisan::call('migrate:fresh', [
-            '--seed' => true,
+        \Artisan::call('migrate', [
             '--force' => true
         ]);
 

@@ -35,6 +35,7 @@
         $firstVideo = $videos->first();
         $defaultVideoUrl = '';
         $defaultVideoIsLocal = false;
+        $defaultVideoThumbnail = '';
         
         $featuredVideoUrl = \App\Models\Setting::get('featured_video_url');
         $featuredEmbedUrl = $featuredVideoUrl;
@@ -50,6 +51,7 @@
                 $defaultVideoUrl = $firstVideo->video_url;
                 if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $defaultVideoUrl, $match)) {
                     $defaultVideoUrl = "https://www.youtube.com/embed/" . $match[1];
+                    $defaultVideoThumbnail = "https://img.youtube.com/vi/" . $match[1] . "/hqdefault.jpg";
                 }
             }
             $defaultVideoTitle = $firstVideo->title;
@@ -58,6 +60,11 @@
             $defaultVideoUrl = $featuredEmbedUrl;
             $defaultVideoTitle = \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi');
             $defaultVideoSubtitle = \App\Models\Setting::get('featured_video_subtitle', 'Dokumentasi komprehensif pengerjaan tim sipil.');
+            if ($featuredVideoUrl && preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $featuredVideoUrl, $match)) {
+                $defaultVideoThumbnail = "https://img.youtube.com/vi/" . $match[1] . "/hqdefault.jpg";
+            } else {
+                $defaultVideoThumbnail = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop';
+            }
         }
     @endphp
 
@@ -67,12 +74,16 @@
         activeVideoTitle: '{{ addslashes($defaultVideoTitle) }}',
         activeVideoSubtitle: '{{ addslashes($defaultVideoSubtitle ?? '') }}',
         activeVideoIsLocal: {{ $defaultVideoIsLocal ? 'true' : 'false' }},
+        activeVideoThumbnail: '{{ $defaultVideoThumbnail }}',
+        isPlaying: false,
         
-        playVideo(url, title, subtitle, isLocal) {
+        playVideo(url, title, subtitle, isLocal, thumbnailUrl) {
             this.activeVideoUrl = url;
             this.activeVideoTitle = title;
             this.activeVideoSubtitle = subtitle;
             this.activeVideoIsLocal = isLocal;
+            this.activeVideoThumbnail = thumbnailUrl;
+            this.isPlaying = false;
             window.scrollTo({
                 top: document.getElementById('player-section').offsetTop - 100,
                 behavior: 'smooth'
@@ -95,20 +106,40 @@
                 <!-- Video Player Frame -->
                 <div class="lg:col-span-8">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#C5A880]/15 border border-[#C5A880]/20 bg-black w-full aspect-video">
-                        <template x-if="activeVideoUrl && activeVideoIsLocal">
-                            <video class="absolute top-0 left-0 w-full h-full border-0 object-cover" 
-                                   :src="activeVideoUrl" 
-                                   controls 
-                                   playsinline>
-                            </video>
-                        </template>
-                        <template x-if="activeVideoUrl && !activeVideoIsLocal">
-                            <iframe class="absolute top-0 left-0 w-full h-full border-0" 
-                                    :src="activeVideoUrl + (activeVideoUrl.includes('?') ? '&' : '?') + 'rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&color=white'" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    allowfullscreen>
-                            </iframe>
-                        </template>
+                        <!-- Display Active Video Cover Image when not playing -->
+                        <div x-show="activeVideoUrl && !isPlaying" class="absolute inset-0 cursor-pointer group" @click="isPlaying = true">
+                            <img :src="activeVideoIsLocal ? 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop' : activeVideoThumbnail" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                                 alt="cover">
+                            <div class="absolute inset-0 bg-black/45 group-hover:bg-black/60 transition-colors duration-300 flex flex-col items-center justify-center">
+                                <!-- Pulsing Gold Play Button -->
+                                <div class="w-20 h-20 rounded-full bg-[#C5A880] text-[#0A1E13] flex items-center justify-center text-2xl shadow-2xl group-hover:scale-110 active:scale-95 transition-all duration-300 relative">
+                                    <i class="fa-solid fa-play ml-1"></i>
+                                    <span class="absolute -inset-3 rounded-full bg-[#C5A880]/30 animate-ping"></span>
+                                </div>
+                                <span class="text-xs text-white font-bold tracking-widest uppercase mt-4 opacity-80 group-hover:opacity-100 transition-opacity">Putar Video Dokumentasi</span>
+                            </div>
+                        </div>
+
+                        <!-- Video Player Frame when playing -->
+                        <div x-show="activeVideoUrl && isPlaying" class="w-full h-full">
+                            <template x-if="activeVideoIsLocal">
+                                <video class="absolute top-0 left-0 w-full h-full border-0 object-cover" 
+                                       :src="activeVideoUrl" 
+                                       controls 
+                                       autoplay
+                                       playsinline>
+                                </video>
+                            </template>
+                            <template x-if="!activeVideoIsLocal">
+                                <iframe class="absolute top-0 left-0 w-full h-full border-0" 
+                                        :src="activeVideoUrl + (activeVideoUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=0&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&color=white'" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                </iframe>
+                            </template>
+                        </div>
+                        
                         <template x-if="!activeVideoUrl">
                             <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 bg-black/80 p-6">
                                 <i class="fa-solid fa-play text-5xl mb-4 text-[#C5A880] animate-pulse"></i>
@@ -145,7 +176,7 @@
                     @if($featuredVideoUrl && $videos->isEmpty())
                         <div class="group bg-white/5 rounded-3xl border border-white/10 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:border-[#C5A880]/30 transition-all duration-350">
                             <div class="relative h-48 bg-black overflow-hidden cursor-pointer" 
-                                 @click="playVideo('{{ $featuredEmbedUrl }}', '{{ \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi') }}', '{{ \App\Models\Setting::get('featured_video_subtitle') }}', false)">
+                                 @click="playVideo('{{ $featuredEmbedUrl }}', '{{ \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi') }}', '{{ \App\Models\Setting::get('featured_video_subtitle') }}', false, 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop')">
                                 <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" alt="Video cover">
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-14 h-14 rounded-full bg-[#C5A880] text-[#0A1E13] flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
@@ -156,7 +187,7 @@
                             <div class="p-6 space-y-2">
                                 <span class="text-[10px] text-[#C5A880] font-bold uppercase tracking-widest block">Featured Video</span>
                                 <h4 class="font-bold text-white text-base font-serif group-hover:text-[#C5A880] transition-colors cursor-pointer"
-                                    @click="playVideo('{{ $featuredEmbedUrl }}', '{{ \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi') }}', '{{ \App\Models\Setting::get('featured_video_subtitle') }}', false)">
+                                    @click="playVideo('{{ $featuredEmbedUrl }}', '{{ \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi') }}', '{{ \App\Models\Setting::get('featured_video_subtitle') }}', false, 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop')">
                                     {{ \App\Models\Setting::get('featured_video_title', 'Video Utama Dokumentasi') }}
                                 </h4>
                             </div>
@@ -175,11 +206,11 @@
                                     $youtubeId = $match[1];
                                 }
                             }
-                            $thumbnailUrl = $youtubeId ? "https://img.youtube.com/vi/{$youtubeId}/mqdefault.jpg" : 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop';
+                            $thumbnailUrl = $youtubeId ? "https://img.youtube.com/vi/{$youtubeId}/hqdefault.jpg" : 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop';
                         @endphp
                         <div class="group bg-white/5 rounded-3xl border border-white/10 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:border-[#C5A880]/30 transition-all duration-350">
                             <div class="relative h-48 bg-black overflow-hidden cursor-pointer" 
-                                 @click="playVideo('{{ $playUrl }}', '{{ addslashes($v->title) }}', '{{ addslashes($v->description ?? '') }}', {{ $isLocal ? 'true' : 'false' }})">
+                                 @click="playVideo('{{ $playUrl }}', '{{ addslashes($v->title) }}', '{{ addslashes($v->description ?? '') }}', {{ $isLocal ? 'true' : 'false' }}, '{{ $thumbnailUrl }}')">
                                 @if($isLocal)
                                     <div class="w-full h-full bg-black/40 flex flex-col items-center justify-center relative p-6">
                                         <i class="fa-solid fa-file-video text-[#C5A880] text-5xl mb-2 opacity-80 group-hover:scale-105 transition-transform duration-300"></i>
@@ -206,7 +237,7 @@
                                     {{ $isLocal ? 'File Terunggah' : 'YouTube Video' }}
                                 </span>
                                 <h4 class="font-bold text-white text-base font-serif group-hover:text-[#C5A880] transition-colors cursor-pointer"
-                                    @click="playVideo('{{ $playUrl }}', '{{ addslashes($v->title) }}', '{{ addslashes($v->description ?? '') }}', {{ $isLocal ? 'true' : 'false' }})">
+                                    @click="playVideo('{{ $playUrl }}', '{{ addslashes($v->title) }}', '{{ addslashes($v->description ?? '') }}', {{ $isLocal ? 'true' : 'false' }}, '{{ $thumbnailUrl }}')">
                                     {{ $v->title }}
                                 </h4>
                             </div>
@@ -215,7 +246,7 @@
                         <!-- Mock static items as fallback if none in DB -->
                         <div class="group bg-white/5 rounded-3xl border border-white/10 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:border-[#C5A880]/30 transition-all duration-350">
                             <div class="relative h-48 bg-black overflow-hidden cursor-pointer" 
-                                 @click="playVideo('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Pemasangan Kitchen Set Custom Granit', 'Video footage pengerjaan finishing detail interior.', false)">
+                                 @click="playVideo('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Pemasangan Kitchen Set Custom Granit', 'Video footage pengerjaan finishing detail interior.', false, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop')">
                                 <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" alt="Video cover">
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-14 h-14 rounded-full bg-[#C5A880] text-[#0A1E13] flex items-center justify-center text-lg shadow-lg">

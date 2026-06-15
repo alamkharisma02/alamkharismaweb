@@ -34,7 +34,7 @@
         <!-- Sidebar Backdrop for Mobile -->
         <div x-show="sidebarOpen" 
              @click="sidebarOpen = false" 
-             class="fixed inset-0 z-20 bg-slate-900/60 backdrop-blur-sm transition-opacity md:hidden"
+             class="fixed inset-0 z-20 bg-emerald-900/60 backdrop-blur-sm transition-opacity md:hidden"
              style="display: none;"></div>
         
         <!-- Sidebar -->

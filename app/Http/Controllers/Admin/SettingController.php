@@ -14,6 +14,10 @@ class SettingController extends Controller
     public function edit()
     {
         $settings = [
+            'color_brand_primary' => Setting::get('color_brand_primary', '#113F27'),
+            'color_brand_primary_hover' => Setting::get('color_brand_primary_hover', '#0C2B1B'),
+            'color_brand_accent' => Setting::get('color_brand_accent', '#C5A880'),
+            'color_brand_accent_hover' => Setting::get('color_brand_accent_hover', '#B4966B'),
             'site_name' => Setting::get('site_name'),
             'site_tagline' => Setting::get('site_tagline'),
             'hero_title' => Setting::get('hero_title'),
@@ -81,6 +85,10 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
+            'color_brand_primary' => 'required|string|regex:/^#[a-fA-F0-9]{6}$/',
+            'color_brand_primary_hover' => 'required|string|regex:/^#[a-fA-F0-9]{6}$/',
+            'color_brand_accent' => 'required|string|regex:/^#[a-fA-F0-9]{6}$/',
+            'color_brand_accent_hover' => 'required|string|regex:/^#[a-fA-F0-9]{6}$/',
             'site_name' => 'required|string|max:255',
             'site_tagline' => 'required|string|max:255',
             'hero_title' => 'required|string|max:255',
@@ -140,6 +148,7 @@ class SettingController extends Controller
         ]);
 
         $textSettings = [
+            'color_brand_primary', 'color_brand_primary_hover', 'color_brand_accent', 'color_brand_accent_hover',
             'site_name', 'site_tagline', 'hero_title', 'hero_subtitle', 'hero_video_url',
             'featured_video_url', 'featured_video_title', 'featured_video_subtitle',
             'contact_whatsapp', 'contact_phone', 'contact_email', 'contact_address', 'contact_map_iframe',

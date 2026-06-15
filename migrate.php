@@ -28,12 +28,11 @@ if (config('database.default') === 'sqlite') {
     }
 }
 
-// Run migrate:fresh --seed --force
-echo "Sedang menjalankan migrasi dan seeding database...<br>";
+// Run migrate --force (SAFE: does not wipe database data)
+echo "Sedang menjalankan migrasi database...<br>";
 
 try {
-    $status = $kernel->call('migrate:fresh', [
-        '--seed' => true,
+    $status = $kernel->call('migrate', [
         '--force' => true
     ]);
 

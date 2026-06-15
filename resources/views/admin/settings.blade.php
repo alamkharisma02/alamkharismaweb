@@ -22,7 +22,13 @@
         @method('PUT')
 
         <!-- Card 1: Branding & Identitas -->
-        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6"
+             x-data="{ 
+                colorPrimary: '{{ old('color_brand_primary', $settings['color_brand_primary'] ?? '#113F27') }}',
+                colorPrimaryHover: '{{ old('color_brand_primary_hover', $settings['color_brand_primary_hover'] ?? '#0C2B1B') }}',
+                colorAccent: '{{ old('color_brand_accent', $settings['color_brand_accent'] ?? '#C5A880') }}',
+                colorAccentHover: '{{ old('color_brand_accent_hover', $settings['color_brand_accent_hover'] ?? '#B4966B') }}'
+             }">
             <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-100 pb-2.5">
                 <i class="fa-solid fa-address-card text-brand-accent mr-2"></i> Identitas Website & Tagline
             </h3>
@@ -36,6 +42,52 @@
                     <label for="site_tagline" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tagline Perusahaan*</label>
                     <input type="text" name="site_tagline" id="site_tagline" value="{{ old('site_tagline', $settings['site_tagline']) }}" required
                            class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                </div>
+            </div>
+
+            <!-- Custom Brand Colors Picker Section -->
+            <div class="border-t border-slate-100 pt-5 mt-4 space-y-4">
+                <div class="flex flex-col">
+                    <h4 class="font-bold text-slate-700 text-xs uppercase tracking-wider">Skema Warna Kustom Perusahaan</h4>
+                    <p class="text-[11px] text-slate-400">Atur skema warna utama website secara dinamis (warna default: Hijau Pine #113F27 dan Emas #C5A880).</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <div>
+                        <label for="color_brand_primary" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Warna Utama (Hijau)*</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="color" name="color_brand_primary" id="color_brand_primary" x-model="colorPrimary" required
+                                   class="h-10 w-12 rounded-xl border border-slate-300 cursor-pointer p-0.5 bg-white">
+                            <input type="text" :value="colorPrimary" readonly
+                                   class="block w-full px-3 py-2 border border-slate-200 bg-slate-50 text-xs rounded-xl font-mono text-slate-600 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="color_brand_primary_hover" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Warna Utama Hover*</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="color" name="color_brand_primary_hover" id="color_brand_primary_hover" x-model="colorPrimaryHover" required
+                                   class="h-10 w-12 rounded-xl border border-slate-300 cursor-pointer p-0.5 bg-white">
+                            <input type="text" :value="colorPrimaryHover" readonly
+                                   class="block w-full px-3 py-2 border border-slate-200 bg-slate-50 text-xs rounded-xl font-mono text-slate-600 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="color_brand_accent" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Warna Aksen (Emas)*</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="color" name="color_brand_accent" id="color_brand_accent" x-model="colorAccent" required
+                                   class="h-10 w-12 rounded-xl border border-slate-300 cursor-pointer p-0.5 bg-white">
+                            <input type="text" :value="colorAccent" readonly
+                                   class="block w-full px-3 py-2 border border-slate-200 bg-slate-50 text-xs rounded-xl font-mono text-slate-600 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="color_brand_accent_hover" class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Warna Aksen Hover*</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="color" name="color_brand_accent_hover" id="color_brand_accent_hover" x-model="colorAccentHover" required
+                                   class="h-10 w-12 rounded-xl border border-slate-300 cursor-pointer p-0.5 bg-white">
+                            <input type="text" :value="colorAccentHover" readonly
+                                   class="block w-full px-3 py-2 border border-slate-200 bg-slate-50 text-xs rounded-xl font-mono text-slate-600 focus:outline-none">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

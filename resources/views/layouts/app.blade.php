@@ -20,7 +20,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,450&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,450&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,16 +32,26 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <style>
-        body {
-            font-family: 'Outfit', sans-serif;
+        :root {
+            --color-brand-primary: {{ \App\Models\Setting::get('color_brand_primary', '#113F27') }};
+            --color-brand-primary-hover: {{ \App\Models\Setting::get('color_brand_primary_hover', '#0C2B1B') }};
+            --color-brand-accent: {{ \App\Models\Setting::get('color_brand_accent', '#C5A880') }};
+            --color-brand-accent-hover: {{ \App\Models\Setting::get('color_brand_accent_hover', '#B4966B') }};
         }
-        h1, h2, h3, h4, h5, h6, .font-serif {
+        body {
+            font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+        .font-serif {
             font-family: 'Cormorant Garamond', Georgia, serif;
         }
     </style>
     @yield('styles')
 </head>
-<body class="bg-[#F9F7F3] text-slate-900 selection:bg-brand-primary selection:text-white overflow-x-hidden">
+<body class="bg-[#F9F7F3] text-emerald-900 selection:bg-brand-primary selection:text-white overflow-x-hidden">
 
     <!-- Luxury Preloader Screen -->
     <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0A1E13] transition-all duration-700 ease-in-out">
@@ -63,16 +73,11 @@
         </div>
     </div>
 
-    <!-- Header / Sticky Glassmorphism Navbar -->
-    <!-- Header / Sticky Glassmorphism Navbar -->
+    <!-- Header / Full-width Sticky Navbar -->
     <header x-data="{ mobileMenuOpen: false, isScrolled: false }" 
-            x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 60 })"
-            @if(Route::is('home'))
-            :class="isScrolled ? 'bg-[#0A1E13]/95 backdrop-blur-md shadow-lg py-2.5 border-b border-emerald-950/25' : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent py-4'"
-            @else
-            class="bg-[#0A1E13] py-3.5 shadow-lg border-b border-emerald-950/25"
-            @endif
-            class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+            x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 10 })"
+            :class="isScrolled ? 'bg-[#0A1E13]/95 border-b border-[#C5A880]/20 shadow-xl py-3' : 'bg-[#0A1E13] border-b border-white/5 py-4.5'"
+            class="sticky top-0 w-full z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
