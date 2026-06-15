@@ -25,8 +25,7 @@ class Setting extends Model
                 return $default;
             }
         }
-        $val = self::$cachedSettings[$key] ?? null;
-        return ($val === null || $val === '') ? $default : $val;
+        return self::$cachedSettings[$key] ?? $default;
     }
 
     /**
