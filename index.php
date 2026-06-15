@@ -56,7 +56,16 @@ require __DIR__.'/vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/bootstrap/app.php';
 
-if ($isNewDb) {
+// Only run auto-migration and seeding on local environment (prevent production database wipes)
+$isLocal = false;
+if (file_exists(__DIR__.'/.env')) {
+    $envContent = @file_get_contents(__DIR__.'/.env');
+    if ($envContent !== false && preg_match('/^APP_ENV=local/m', $envContent)) {
+        $isLocal = true;
+    }
+}
+
+if ($isNewDb && $isLocal) {
     try {
         $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
         $kernel->call('migrate', ['--force' => true, '--seed' => true]);
