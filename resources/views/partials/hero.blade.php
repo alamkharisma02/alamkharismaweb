@@ -74,7 +74,7 @@
     <!-- ==================================================== -->
     <!-- 1. FULLSCREEN SLIDESHOW BANNER (Visual Only)          -->
     <!-- ==================================================== -->
-    <div class="relative h-[65vh] sm:h-[75vh] md:h-[80vh] w-full overflow-hidden bg-black">
+    <div class="relative h-[40vh] sm:h-[50vh] md:h-[55vh] lg:h-[60vh] w-full overflow-hidden bg-black">
         
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
@@ -110,10 +110,15 @@
                  x-transition:enter="transition ease-out duration-500"
                  x-transition:enter-start="opacity-0 -translate-x-4"
                  x-transition:enter-end="opacity-100 translate-x-0"
-                 class="bg-[#113F27] border-l-4 border-[#C5A880] px-4 py-2.5 sm:px-5 sm:py-3.5 shadow-2xl rounded-r-xl max-w-[80vw] sm:max-w-md">
+                 class="bg-[#0A1E13]/90 border border-white/10 border-l-4 border-l-[#C5A880] px-4 py-3 sm:px-5 sm:py-4 shadow-2xl rounded-r-xl max-w-[80vw] sm:max-w-md backdrop-blur-md">
                 <h4 class="text-white font-black text-xs sm:text-sm md:text-base tracking-wide uppercase leading-snug">
                     {{ $slide['title'] }}
                 </h4>
+                @if($slide['desc'])
+                    <p class="text-slate-300 text-[10px] sm:text-xs font-normal mt-1 leading-relaxed line-clamp-2">
+                        {{ $slide['desc'] }}
+                    </p>
+                @endif
             </div>
             @endforeach
         </div>
