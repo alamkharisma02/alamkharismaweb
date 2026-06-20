@@ -49,17 +49,17 @@
                    class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ !$category ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
                     Semua Kategori
                 </a>
+                <a href="{{ route('projects.index', ['category' => 'Interior']) }}" 
+                   class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === 'Interior' ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
+                    Pekerjaan Interior
+                </a>
+                <a href="{{ route('projects.index', ['category' => 'Eksterior']) }}" 
+                   class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === 'Eksterior' ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
+                    Pekerjaan Eksterior
+                </a>
                 <a href="{{ route('projects.index', ['category' => 'Sipil']) }}" 
                    class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === 'Sipil' ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
                     Pekerjaan Sipil
-                </a>
-                <a href="{{ route('projects.index', ['category' => 'Residensial']) }}" 
-                   class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === 'Residensial' ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
-                    Residensial & Villa
-                </a>
-                <a href="{{ route('projects.index', ['category' => 'Komersial']) }}" 
-                   class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border border-transparent tracking-wider uppercase {{ $category === 'Komersial' ? 'bg-[#C5A880] text-[#0A1E13] font-bold shadow-lg shadow-[#C5A880]/20' : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white' }}">
-                    Komersial & Gedung
                 </a>
             </div>
 

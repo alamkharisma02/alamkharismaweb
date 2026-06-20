@@ -79,7 +79,7 @@
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
             @foreach($heroSlides as $idx => $slide)
-            <div class="absolute inset-0 transition-opacity duration-[2000ms] ease-in-out"
+            <div class="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out"
                  :class="currentSlide === {{ $idx }} ? 'opacity-100' : 'opacity-0'">
                 <img src="{{ $slide['image'] }}"
                      class="w-full h-full object-cover"
@@ -90,81 +90,53 @@
             @endforeach
         </div>
 
-        <!-- Overlays to Make Images Pop & Blend Muls dengan Section Bawah -->
-        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1E13] via-[#0A1E13]/30 to-transparent z-[1]"></div>
-        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/40 to-transparent z-[1]"></div>
+        <!-- Overlays to Make Images Pop (Top gradient stays for header contrast) -->
+        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 to-transparent z-[1]"></div>
 
-        <!-- Background Video Overlay (if hero_video_url is active) -->
-        @if(\App\Models\Setting::get('hero_video_url'))
-            @php
-                $heroVideoUrl = \App\Models\Setting::get('hero_video_url');
-                $videoId = '';
-                if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $heroVideoUrl, $match)) {
-                    $videoId = $match[1];
-                }
-            @endphp
-            @if($videoId)
-                <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none opacity-10 z-[2] mix-blend-luminosity">
-                    <iframe class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2"
-                            src="https://www.youtube.com/embed/{{ $videoId }}?autoplay=1&mute=1&loop=1&playlist={{ $videoId }}&controls=0&showinfo=0&rel=0&enablejsapi=1" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-            @else
-                <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-10 object-center z-[2] mix-blend-luminosity">
-                    <source src="{{ $heroVideoUrl }}" type="video/mp4">
-                </video>
-            @endif
-        @endif
+        <!-- Navigation Arrows (Waskita style manual control) -->
+        <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; goTo(currentSlide)"
+                class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/45 hover:bg-black/70 border border-white/10 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm shadow-lg">
+            <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+        </button>
+        <button @click="currentSlide = (currentSlide + 1) % totalSlides; goTo(currentSlide)"
+                class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/45 hover:bg-black/70 border border-white/10 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm shadow-lg">
+            <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+        </button>
 
-        <!-- ===== BOTTOM SLIDE INFO BAR (Waskita/WIKA-Inspired Ticker) ===== -->
-        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/45 to-transparent pt-12 pb-6 sm:pb-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end justify-between gap-6">
-                    <!-- Active Slide Info (high-contrast dark backdrop card for ultimate legibility) -->
-                    <div class="hidden sm:block space-y-1 w-full max-w-xl">
-                        @foreach($heroSlides as $idx => $slide)
-                        <div x-show="currentSlide === {{ $idx }}" 
-                             x-transition:enter="transition ease-out duration-700"
-                             x-transition:enter-start="opacity-0 translate-y-4"
-                             x-transition:enter-end="opacity-100 translate-y-0"
-                             class="bg-black/60 border border-white/10 backdrop-blur-md p-4 rounded-xl shadow-2xl">
-                            <span class="inline-flex items-center text-[#C5A880] text-xs font-bold tracking-[0.2em] uppercase">
-                                <i class="fa-solid fa-circle-info mr-1.5 text-[#C5A880]"></i> {{ $slide['label'] }}
-                            </span>
-                            <h4 class="text-white font-black text-lg sm:text-xl tracking-wide mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{{ $slide['title'] }}</h4>
-                            @if($slide['desc'])
-                                <p class="text-slate-200 text-xs font-light leading-relaxed mt-1.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">{{ $slide['desc'] }}</p>
-                            @endif
-                        </div>
-                        @endforeach
-                    </div>
-
-                    <!-- Slide Navigation (Waskita-style progress indicators) -->
-                    <div class="flex items-center gap-3">
-                        <!-- Slide Counter -->
-                        <div class="text-white/60 text-xs font-mono tracking-wider mr-2 hidden sm:block">
-                            <span class="text-[#C5A880] font-bold text-base" x-text="String(currentSlide + 1).padStart(2, '0')">01</span>
-                            <span class="mx-1">/</span>
-                            <span>{{ str_pad($totalSlides, 2, '0', STR_PAD_LEFT) }}</span>
-                        </div>
-                        @foreach($heroSlides as $idx => $slide)
-                        <button @click="goTo({{ $idx }})"
-                                class="relative cursor-pointer group h-8 flex items-center">
-                            <div class="w-10 sm:w-14 h-[3px] rounded-full overflow-hidden transition-colors"
-                                 :class="currentSlide === {{ $idx }} ? 'bg-[#C5A880]/30' : 'bg-white/15 group-hover:bg-white/25'">
-                                <div class="h-full bg-[#C5A880] rounded-full transition-all duration-300"
-                                     :class="currentSlide === {{ $idx }} ? 'w-full' : 'w-0'"
-                                     :style="currentSlide === {{ $idx }} ? 'animation: slideProgress 6s linear forwards' : ''">
-                                </div>
-                            </div>
-                        </button>
-                        @endforeach
-                    </div>
-                </div>
+        <!-- Project Name Box (Bottom Left, solid green matching Waskita) -->
+        <div class="absolute bottom-6 left-6 sm:left-12 z-20">
+            @foreach($heroSlides as $idx => $slide)
+            <div x-show="currentSlide === {{ $idx }}" 
+                 x-transition:enter="transition ease-out duration-500"
+                 x-transition:enter-start="opacity-0 -translate-x-4"
+                 x-transition:enter-end="opacity-100 translate-x-0"
+                 class="bg-[#113F27] border-l-4 border-[#C5A880] px-4 py-2.5 sm:px-5 sm:py-3.5 shadow-2xl rounded-r-xl max-w-[80vw] sm:max-w-md">
+                <h4 class="text-white font-black text-xs sm:text-sm md:text-base tracking-wide uppercase leading-snug">
+                    {{ $slide['title'] }}
+                </h4>
             </div>
+            @endforeach
+        </div>
+
+        <!-- Slide Counter & Ticker lines (Bottom Right) -->
+        <div class="absolute bottom-6 right-6 sm:right-12 z-20 flex items-center gap-3">
+            <!-- Slide Counter -->
+            <div class="text-white/80 text-xs font-mono tracking-wider mr-1 hidden sm:block drop-shadow">
+                <span class="text-[#C5A880] font-bold text-base" x-text="String(currentSlide + 1).padStart(2, '0')">01</span>
+                <span class="mx-1">/</span>
+                <span>{{ str_pad($totalSlides, 2, '0', STR_PAD_LEFT) }}</span>
+            </div>
+            @foreach($heroSlides as $idx => $slide)
+            <button @click="goTo({{ $idx }})"
+                    class="relative cursor-pointer group h-6 flex items-center">
+                <div class="w-8 sm:w-12 h-[3px] rounded-full overflow-hidden transition-colors bg-white/20 group-hover:bg-white/40">
+                    <div class="h-full bg-[#C5A880] rounded-full transition-all duration-300"
+                         :class="currentSlide === {{ $idx }} ? 'w-full' : 'w-0'"
+                         :style="currentSlide === {{ $idx }} ? 'animation: slideProgress 6s linear forwards' : ''">
+                    </div>
+                </div>
+            </button>
+            @endforeach
         </div>
 
         <!-- ===== SCROLL DOWN INDICATOR ===== -->

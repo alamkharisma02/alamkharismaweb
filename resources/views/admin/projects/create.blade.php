@@ -49,8 +49,8 @@
                     <label for="category" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Kategori*</label>
                     <select name="category" id="category" required class="block w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent">
                         <option value="Sipil" {{ old('category') == 'Sipil' ? 'selected' : '' }}>Pekerjaan Sipil / Struktur</option>
-                        <option value="Residensial" {{ old('category') == 'Residensial' ? 'selected' : '' }}>Residensial / Villa</option>
-                        <option value="Komersial" {{ old('category') == 'Komersial' ? 'selected' : '' }}>Komersial / Gedung</option>
+                        <option value="Interior" {{ old('category') == 'Interior' ? 'selected' : '' }}>Pekerjaan Interior / Furniture</option>
+                        <option value="Eksterior" {{ old('category') == 'Eksterior' ? 'selected' : '' }}>Pekerjaan Eksterior / Fasad</option>
                     </select>
                 </div>
 
