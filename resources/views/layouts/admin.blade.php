@@ -84,12 +84,6 @@
                     Kelola Video
                 </a>
 
-                <a href="{{ route('admin.testimonials.index') }}" 
-                   class="flex items-center px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:translate-x-1 {{ Route::is('admin.testimonials.*') ? 'bg-[#C5A880] text-[#0A1E13] shadow-lg shadow-[#C5A880]/15' : 'hover:bg-emerald-950/40 hover:text-[#C5A880]' }}">
-                    <i class="fa-solid fa-comments w-5 text-base mr-3 {{ Route::is('admin.testimonials.*') ? 'text-[#0A1E13]' : 'text-[#C5A880]' }}"></i>
-                    Kelola Testimoni
-                </a>
-
                 <a href="{{ route('admin.settings.edit') }}" 
                    class="flex items-center px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:translate-x-1 {{ Route::is('admin.settings.*') ? 'bg-[#C5A880] text-[#0A1E13] shadow-lg shadow-[#C5A880]/15' : 'hover:bg-emerald-950/40 hover:text-[#C5A880]' }}">
                     <i class="fa-solid fa-sliders w-5 text-base mr-3 {{ Route::is('admin.settings.*') ? 'text-[#0A1E13]' : 'text-[#C5A880]' }}"></i>

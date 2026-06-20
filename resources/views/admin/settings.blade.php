@@ -277,7 +277,6 @@
                         'projects' => 'Halaman Portofolio Proyek',
                         'gallery' => 'Halaman Galeri Foto',
                         'video_gallery' => 'Halaman Galeri Video',
-                        'testimonials' => 'Halaman Testimoni Klien',
                         'articles' => 'Halaman Artikel & Berita',
                         'contact' => 'Halaman Kontak Hubungi Kami',
                     ];
