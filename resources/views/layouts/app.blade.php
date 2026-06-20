@@ -128,7 +128,6 @@
                              style="display: none;">
                             <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Profil Kami</a>
                             <a href="{{ route('video_gallery') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Video Gallery</a>
-                            <a href="{{ route('testimonials') }}" class="block px-4 py-2 text-xs sm:text-sm font-medium text-white/90 hover:bg-emerald-950 hover:text-[#C5A880] transition-colors">Testimonial</a>
                         </div>
                     </div>
 
@@ -183,7 +182,6 @@
                     <div x-show="mobTentangOpen" x-collapse class="pl-6 space-y-2 mt-2" style="display: none;">
                         <a href="{{ route('profile') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Profil Kami</a>
                         <a href="{{ route('video_gallery') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Video Gallery</a>
-                        <a href="{{ route('testimonials') }}" class="block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-emerald-950/40 hover:text-[#C5A880] transition-colors text-white/70">Testimonial</a>
                     </div>
                 </div>
 

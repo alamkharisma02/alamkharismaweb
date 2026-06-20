@@ -12,7 +12,6 @@
     @include('partials.workflow')
     @include('partials.advantages')
     @include('partials.portfolio')
-    @include('partials.testimonials')
     @include('partials.articles')
     @include('partials.contact')
 @endsection
