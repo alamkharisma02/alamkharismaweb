@@ -74,7 +74,7 @@
     <!-- ==================================================== -->
     <!-- 1. FULLSCREEN SLIDESHOW BANNER (Visual Only)          -->
     <!-- ==================================================== -->
-    <div class="relative h-[40vh] sm:h-[50vh] md:h-[55vh] lg:h-[60vh] w-full overflow-hidden bg-black">
+    <div class="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-black">
         
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
@@ -110,7 +110,7 @@
                  x-transition:enter="transition ease-out duration-500"
                  x-transition:enter-start="opacity-0 -translate-x-4"
                  x-transition:enter-end="opacity-100 translate-x-0"
-                 class="bg-[#0A1E13]/90 border border-white/10 border-l-4 border-l-[#C5A880] px-4 py-2.5 sm:px-5 sm:py-3.5 shadow-2xl rounded-r-xl max-w-[80vw] sm:max-w-md backdrop-blur-md">
+                 class="bg-black/95 border border-white/10 border-l-4 border-l-[#C5A880] px-4 py-2.5 sm:px-5 sm:py-3.5 shadow-2xl rounded-r-xl max-w-[80vw] sm:max-w-md backdrop-blur-md">
                 <h4 class="text-white font-bold text-sm sm:text-base md:text-lg tracking-wide leading-snug font-sans">
                     {{ $slide['title'] }}
                 </h4>
