@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\HeroSlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         'edit' => 'admin.projects.edit',
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
+    ])->except(['show']);
+
+    // Hero Slides CRUD
+    Route::resource('hero-slides', HeroSlideController::class)->names([
+        'index' => 'admin.hero_slides.index',
+        'create' => 'admin.hero_slides.create',
+        'store' => 'admin.hero_slides.store',
+        'edit' => 'admin.hero_slides.edit',
+        'update' => 'admin.hero_slides.update',
+        'destroy' => 'admin.hero_slides.destroy',
     ])->except(['show']);
 
     // Articles CRUD

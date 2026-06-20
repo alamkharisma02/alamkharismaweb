@@ -1,17 +1,15 @@
 <!-- Hero Section - Waskita-Inspired Fullscreen Image Slideshow with Content Below -->
 @php
-    // Fetch featured projects for the hero slideshow
-    $featuredProjects = \App\Models\Project::where('is_featured', true)->latest()->take(5)->get();
+    // Fetch slides from hero_slides table ordered by order
+    $featuredSlides = \App\Models\HeroSlide::orderBy('order', 'asc')->get();
     
     $heroSlides = [];
-    if ($featuredProjects->count() > 0) {
-        foreach ($featuredProjects as $p) {
+    if ($featuredSlides->count() > 0) {
+        foreach ($featuredSlides as $s) {
             $heroSlides[] = [
-                'image' => $p->cover_image ?? asset('images/projects/pertamina-ep-zona4.jpg'),
-                'alt' => $p->title,
-                'label' => $p->category . ($p->location ? ' | ' . $p->location : ''),
-                'title' => $p->title,
-                'desc' => $p->description ? Str::limit(strip_tags($p->description), 120) : '',
+                'image' => $s->image,
+                'alt' => $s->title,
+                'title' => $s->title,
             ];
         }
     } else {
@@ -19,31 +17,23 @@
         $heroSlides = [
             [
                 'image' => asset('images/projects/pertamina-ep-zona4.jpg'),
-                'alt' => 'Pertamina EP Zona 4 - Proyek Eksterior Gedung',
-                'label' => 'Proyek Unggulan | Kuningan, Jakarta Selatan',
+                'alt' => 'Pertamina EP Zona 4',
                 'title' => 'Pertamina EP Zona 4',
-                'desc' => 'Pembangunan Gedung Kantor & Fasad Eksterior Modern',
             ],
             [
                 'image' => asset('images/projects/interior-office-1.jpg'),
-                'alt' => 'Interior Kantor WOPOM - Desain Premium',
-                'label' => 'Interior Premium | Badung, Bali',
+                'alt' => 'Kantor WOPOM Interior',
                 'title' => 'Kantor WOPOM Interior',
-                'desc' => 'Desain Interior Kantor Mezzanine & Workspace Modern',
             ],
             [
                 'image' => asset('images/projects/lapangan-miring.jpg'),
-                'alt' => 'Lapangan Miring SKK Migas - Infrastruktur',
-                'label' => 'Infrastruktur | Pasuruan, Jawa Timur',
+                'alt' => 'Lapangan Miring SKK Migas',
                 'title' => 'Lapangan Miring SKK Migas',
-                'desc' => 'Pembangunan Monumen & Infrastruktur Area',
             ],
             [
                 'image' => asset('images/projects/interior-office-2.jpg'),
-                'alt' => 'Interior Office Premium Finishing',
-                'label' => 'Fit-Out Interior | Sleman, Yogyakarta',
+                'alt' => 'Office Interior Finishing',
                 'title' => 'Office Interior Finishing',
-                'desc' => 'Wall Mural, Pencahayaan Dramatis & Workspace Premium',
             ],
         ];
     }

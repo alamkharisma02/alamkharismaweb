@@ -72,6 +72,12 @@
                     Kelola Proyek
                 </a>
 
+                <a href="{{ route('admin.hero_slides.index') }}" 
+                   class="flex items-center px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:translate-x-1 {{ Route::is('admin.hero_slides.*') ? 'bg-[#C5A880] text-[#0A1E13] shadow-lg shadow-[#C5A880]/15' : 'hover:bg-emerald-950/40 hover:text-[#C5A880]' }}">
+                    <i class="fa-solid fa-images w-5 text-base mr-3 {{ Route::is('admin.hero_slides.*') ? 'text-[#0A1E13]' : 'text-[#C5A880]' }}"></i>
+                    Kelola Slideshow
+                </a>
+
                 <a href="{{ route('admin.articles.index') }}" 
                    class="flex items-center px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:translate-x-1 {{ Route::is('admin.articles.*') ? 'bg-[#C5A880] text-[#0A1E13] shadow-lg shadow-[#C5A880]/15' : 'hover:bg-emerald-950/40 hover:text-[#C5A880]' }}">
                     <i class="fa-solid fa-newspaper w-5 text-base mr-3 {{ Route::is('admin.articles.*') ? 'text-[#0A1E13]' : 'text-[#C5A880]' }}"></i>
