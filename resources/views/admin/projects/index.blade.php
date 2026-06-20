@@ -38,7 +38,14 @@
                                              class="w-full h-full object-cover" alt="Cover">
                                     </div>
                                     <div>
-                                        <div class="font-bold text-slate-900 leading-snug">{{ $project->title }}</div>
+                                        <div class="font-bold text-slate-900 leading-snug flex items-center gap-2">
+                                            {{ $project->title }}
+                                            @if($project->is_featured)
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 uppercase tracking-wider">
+                                                    <i class="fa-solid fa-star mr-1"></i> Hero Slide
+                                                </span>
+                                            @endif
+                                        </div>
                                         <div class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-map-marker-alt text-brand-accent mr-1"></i> {{ $project->location }}</div>
                                     </div>
                                 </div>
@@ -103,7 +110,14 @@
                                  class="w-full h-full object-cover" alt="Cover">
                         </div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug break-words">{{ $project->title }}</h4>
+                            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug break-words flex items-center flex-wrap gap-1.5">
+                                {{ $project->title }}
+                                @if($project->is_featured)
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-bold bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 uppercase tracking-wider">
+                                        <i class="fa-solid fa-star mr-1"></i> Hero
+                                    </span>
+                                @endif
+                            </h4>
                             <p class="text-[10px] sm:text-xs text-slate-400 mt-1 flex items-center">
                                 <i class="fa-solid fa-map-marker-alt text-brand-accent mr-1"></i> {{ $project->location }}
                             </p>

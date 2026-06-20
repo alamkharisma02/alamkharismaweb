@@ -17,6 +17,7 @@ class Project extends Model
         'video_url',
         'cover_image',
         'gallery_images',
+        'is_featured',
     ];
 
     protected $casts = [

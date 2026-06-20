@@ -4,6 +4,7 @@
 
 @section('content')
     @include('partials.hero')
+    @include('partials.useful_links')
     @include('partials.divisions')
     @include('partials.cinematic-break')
     @include('partials.services')

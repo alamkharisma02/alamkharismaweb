@@ -102,6 +102,15 @@
                 </div>
             </div>
 
+            <!-- Featured Checkbox -->
+            <div class="flex items-center space-x-3 p-4 bg-emerald-950/5 rounded-xl border border-emerald-950/10">
+                <input type="checkbox" name="is_featured" id="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
+                       class="w-4 h-4 text-brand-accent border-slate-300 rounded focus:ring-brand-accent cursor-pointer">
+                <label for="is_featured" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">
+                    Tampilkan di Slideshow Hero (Halaman Utama)
+                </label>
+            </div>
+
             <!-- Description -->
             <div>
                 <label for="description" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Deskripsi Lengkap Proyek</label>

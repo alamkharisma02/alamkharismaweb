@@ -41,9 +41,11 @@ class ProjectController extends Controller
             'video_url' => 'nullable|url',
             'cover_image_file' => 'nullable|image|max:4096',
             'gallery_files.*' => 'nullable|image|max:4096',
+            'is_featured' => 'nullable|boolean',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
+        $validated['is_featured'] = $request->has('is_featured');
         
         // Handle cover image
         if ($request->hasFile('cover_image_file')) {
@@ -88,9 +90,11 @@ class ProjectController extends Controller
             'video_url' => 'nullable|url',
             'cover_image_file' => 'nullable|image|max:4096',
             'gallery_files.*' => 'nullable|image|max:4096',
+            'is_featured' => 'nullable|boolean',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
+        $validated['is_featured'] = $request->has('is_featured');
 
         // Handle cover image
         if ($request->hasFile('cover_image_file')) {

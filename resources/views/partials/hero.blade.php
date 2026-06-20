@@ -1,35 +1,52 @@
 <!-- Hero Section - Waskita-Inspired Fullscreen Image Slideshow with Content Below -->
 @php
-    $heroSlides = [
-        [
-            'image' => asset('images/projects/pertamina-ep-zona4.jpg'),
-            'alt' => 'Pertamina EP Zona 4 - Proyek Eksterior Gedung',
-            'label' => 'Proyek Unggulan',
-            'title' => 'Pertamina EP Zona 4',
-            'desc' => 'Pembangunan Gedung Kantor & Fasad Eksterior Modern',
-        ],
-        [
-            'image' => asset('images/projects/interior-office-1.jpg'),
-            'alt' => 'Interior Kantor WOPOM - Desain Premium',
-            'label' => 'Interior Premium',
-            'title' => 'Kantor WOPOM Interior',
-            'desc' => 'Desain Interior Kantor Mezzanine & Workspace Modern',
-        ],
-        [
-            'image' => asset('images/projects/lapangan-miring.jpg'),
-            'alt' => 'Lapangan Miring SKK Migas - Infrastruktur',
-            'label' => 'Infrastruktur',
-            'title' => 'Lapangan Miring SKK Migas',
-            'desc' => 'Pembangunan Monumen & Infrastruktur Area',
-        ],
-        [
-            'image' => asset('images/projects/interior-office-2.jpg'),
-            'alt' => 'Interior Office Premium Finishing',
-            'label' => 'Fit-Out Interior',
-            'title' => 'Office Interior Finishing',
-            'desc' => 'Wall Mural, Pencahayaan Dramatis & Workspace Premium',
-        ],
-    ];
+    // Fetch featured projects for the hero slideshow
+    $featuredProjects = \App\Models\Project::where('is_featured', true)->latest()->take(5)->get();
+    
+    $heroSlides = [];
+    if ($featuredProjects->count() > 0) {
+        foreach ($featuredProjects as $p) {
+            $heroSlides[] = [
+                'image' => $p->cover_image ?? asset('images/projects/pertamina-ep-zona4.jpg'),
+                'alt' => $p->title,
+                'label' => $p->category . ($p->location ? ' | ' . $p->location : ''),
+                'title' => $p->title,
+                'desc' => $p->description ? Str::limit(strip_tags($p->description), 120) : '',
+            ];
+        }
+    } else {
+        // Fallback default slides
+        $heroSlides = [
+            [
+                'image' => asset('images/projects/pertamina-ep-zona4.jpg'),
+                'alt' => 'Pertamina EP Zona 4 - Proyek Eksterior Gedung',
+                'label' => 'Proyek Unggulan | Kuningan, Jakarta Selatan',
+                'title' => 'Pertamina EP Zona 4',
+                'desc' => 'Pembangunan Gedung Kantor & Fasad Eksterior Modern',
+            ],
+            [
+                'image' => asset('images/projects/interior-office-1.jpg'),
+                'alt' => 'Interior Kantor WOPOM - Desain Premium',
+                'label' => 'Interior Premium | Badung, Bali',
+                'title' => 'Kantor WOPOM Interior',
+                'desc' => 'Desain Interior Kantor Mezzanine & Workspace Modern',
+            ],
+            [
+                'image' => asset('images/projects/lapangan-miring.jpg'),
+                'alt' => 'Lapangan Miring SKK Migas - Infrastruktur',
+                'label' => 'Infrastruktur | Pasuruan, Jawa Timur',
+                'title' => 'Lapangan Miring SKK Migas',
+                'desc' => 'Pembangunan Monumen & Infrastruktur Area',
+            ],
+            [
+                'image' => asset('images/projects/interior-office-2.jpg'),
+                'alt' => 'Interior Office Premium Finishing',
+                'label' => 'Fit-Out Interior | Sleman, Yogyakarta',
+                'title' => 'Office Interior Finishing',
+                'desc' => 'Wall Mural, Pencahayaan Dramatis & Workspace Premium',
+            ],
+        ];
+    }
     $totalSlides = count($heroSlides);
 @endphp
 
@@ -65,8 +82,7 @@
             <div class="absolute inset-0 transition-opacity duration-[2000ms] ease-in-out"
                  :class="currentSlide === {{ $idx }} ? 'opacity-100' : 'opacity-0'">
                 <img src="{{ $slide['image'] }}"
-                     class="w-full h-full object-cover transition-transform duration-[12000ms] ease-out"
-                     :class="currentSlide === {{ $idx }} ? 'scale-[1.03]' : 'scale-100'"
+                     class="w-full h-full object-cover"
                      alt="{{ $slide['alt'] }}"
                      style="image-rendering: auto;"
                      loading="{{ $idx === 0 ? 'eager' : 'lazy' }}">
@@ -104,19 +120,24 @@
         @endif
 
         <!-- ===== BOTTOM SLIDE INFO BAR (Waskita/WIKA-Inspired Ticker) ===== -->
-        <div class="absolute bottom-0 left-0 right-0 z-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8">
-                <div class="flex items-end justify-between gap-4">
-                    <!-- Active Slide Info -->
-                    <div class="hidden sm:block space-y-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/45 to-transparent pt-12 pb-6 sm:pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-end justify-between gap-6">
+                    <!-- Active Slide Info (high-contrast dark backdrop card for ultimate legibility) -->
+                    <div class="hidden sm:block space-y-1 w-full max-w-xl">
                         @foreach($heroSlides as $idx => $slide)
                         <div x-show="currentSlide === {{ $idx }}" 
-                             x-transition:enter="transition ease-out duration-500"
-                             x-transition:enter-start="opacity-0 translate-y-2"
-                             x-transition:enter-end="opacity-100 translate-y-0">
-                            <span class="text-[#C5A880] text-[10px] font-bold tracking-[0.3em] uppercase">{{ $slide['label'] }}</span>
-                            <h4 class="text-white font-bold text-sm sm:text-base">{{ $slide['title'] }}</h4>
-                            <p class="text-slate-300 text-[10px] sm:text-xs font-light">{{ $slide['desc'] }}</p>
+                             x-transition:enter="transition ease-out duration-700"
+                             x-transition:enter-start="opacity-0 translate-y-4"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             class="bg-black/60 border border-white/10 backdrop-blur-md p-4 rounded-xl shadow-2xl">
+                            <span class="inline-flex items-center text-[#C5A880] text-xs font-bold tracking-[0.2em] uppercase">
+                                <i class="fa-solid fa-circle-info mr-1.5 text-[#C5A880]"></i> {{ $slide['label'] }}
+                            </span>
+                            <h4 class="text-white font-black text-lg sm:text-xl tracking-wide mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{{ $slide['title'] }}</h4>
+                            @if($slide['desc'])
+                                <p class="text-slate-200 text-xs font-light leading-relaxed mt-1.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">{{ $slide['desc'] }}</p>
+                            @endif
                         </div>
                         @endforeach
                     </div>
