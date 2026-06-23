@@ -93,10 +93,17 @@
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
             @foreach($heroSlides as $idx => $slide)
-            <div class="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out"
+            <div class="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out bg-black/90"
                  :class="currentSlide === {{ $idx }} ? 'opacity-100' : 'opacity-0'">
+                <!-- Blurred background version of the image to fill the widescreen space -->
                 <img src="{{ $slide['image'] }}"
-                     class="w-full h-full object-cover"
+                     class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 select-none pointer-events-none scale-105"
+                     alt=""
+                     aria-hidden="true">
+                
+                <!-- Main sharp image shown fully without cropping -->
+                <img src="{{ $slide['image'] }}"
+                     class="relative w-full h-full object-contain mx-auto"
                      alt="{{ $slide['alt'] }}"
                      style="image-rendering: auto;"
                      loading="{{ $idx === 0 ? 'eager' : 'lazy' }}">
