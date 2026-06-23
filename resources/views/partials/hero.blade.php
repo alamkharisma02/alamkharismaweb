@@ -66,25 +66,16 @@
     <!-- ==================================================== -->
     <style>
         .hero-slideshow-aspect {
-            aspect-ratio: 4 / 3;
-            max-height: 55vh;
+            height: 55vh;
         }
         @media (min-width: 640px) {
             .hero-slideshow-aspect {
-                aspect-ratio: 16 / 10;
-                max-height: 60vh;
+                height: 60vh;
             }
         }
         @media (min-width: 768px) {
             .hero-slideshow-aspect {
-                aspect-ratio: 16 / 9;
-                max-height: 68vh;
-            }
-        }
-        @media (min-width: 1024px) {
-            .hero-slideshow-aspect {
-                aspect-ratio: 16 / 9;
-                max-height: 65vh;
+                height: calc(100vh - 90px);
             }
         }
     </style>
@@ -93,17 +84,10 @@
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
             @foreach($heroSlides as $idx => $slide)
-            <div class="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out bg-black/90"
+            <div class="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out"
                  :class="currentSlide === {{ $idx }} ? 'opacity-100' : 'opacity-0'">
-                <!-- Blurred background version of the image to fill the widescreen space -->
                 <img src="{{ $slide['image'] }}"
-                     class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 select-none pointer-events-none scale-105"
-                     alt=""
-                     aria-hidden="true">
-                
-                <!-- Main sharp image shown fully without cropping -->
-                <img src="{{ $slide['image'] }}"
-                     class="relative w-full h-full object-contain mx-auto"
+                     class="w-full h-full object-cover"
                      alt="{{ $slide['alt'] }}"
                      style="image-rendering: auto;"
                      loading="{{ $idx === 0 ? 'eager' : 'lazy' }}">
