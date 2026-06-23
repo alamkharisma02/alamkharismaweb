@@ -49,14 +49,14 @@
              init() {
                  this.interval = setInterval(() => {
                      if (!this.paused) this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                 }, 6000);
+                 }, 10000);
              },
              goTo(i) {
                  this.currentSlide = i;
                  clearInterval(this.interval);
                  this.interval = setInterval(() => {
                      if (!this.paused) this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                 }, 6000);
+                 }, 10000);
              }
          }"
          x-init="init()">
@@ -64,7 +64,22 @@
     <!-- ==================================================== -->
     <!-- 1. FULLSCREEN SLIDESHOW BANNER (Visual Only)          -->
     <!-- ==================================================== -->
-    <div class="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-black">
+    <style>
+        .hero-slideshow-aspect {
+            aspect-ratio: 4 / 3;
+        }
+        @media (min-width: 640px) {
+            .hero-slideshow-aspect {
+                aspect-ratio: 16 / 10;
+            }
+        }
+        @media (min-width: 768px) {
+            .hero-slideshow-aspect {
+                aspect-ratio: 16 / 9;
+            }
+        }
+    </style>
+    <div class="relative w-full hero-slideshow-aspect overflow-hidden bg-black">
         
         <!-- Slideshow Images with Slow Dynamic Sharp Zoom -->
         <div class="absolute inset-0 z-0">
@@ -122,7 +137,7 @@
                 <div class="w-8 sm:w-12 h-[3px] rounded-full overflow-hidden transition-colors bg-white/20 group-hover:bg-white/40">
                     <div class="h-full bg-[#C5A880] rounded-full transition-all duration-300"
                          :class="currentSlide === {{ $idx }} ? 'w-full' : 'w-0'"
-                         :style="currentSlide === {{ $idx }} ? 'animation: slideProgress 6s linear forwards' : ''">
+                         :style="currentSlide === {{ $idx }} ? 'animation: slideProgress 10s linear forwards' : ''">
                     </div>
                 </div>
             </button>
