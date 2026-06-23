@@ -67,15 +67,24 @@
     <style>
         .hero-slideshow-aspect {
             aspect-ratio: 4 / 3;
+            max-height: 50vh;
         }
         @media (min-width: 640px) {
             .hero-slideshow-aspect {
                 aspect-ratio: 16 / 10;
+                max-height: 55vh;
             }
         }
         @media (min-width: 768px) {
             .hero-slideshow-aspect {
                 aspect-ratio: 16 / 9;
+                max-height: 60vh;
+            }
+        }
+        @media (min-width: 1024px) {
+            .hero-slideshow-aspect {
+                aspect-ratio: 16 / 9;
+                max-height: 55vh;
             }
         }
     </style>
