@@ -63,6 +63,41 @@ Route::get('/run-migration', function () {
     }
 });
 
+// Helper route untuk membersihkan cache di Hostinger
+Route::get('/clear-cache', function () {
+    if (request('key') !== 'akbadmin123') {
+        return 'Akses ditolak. Gunakan URL: /clear-cache?key=akbadmin123';
+    }
+
+    try {
+        \Artisan::call('config:clear');
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
+        \Artisan::call('route:clear');
+        return 'Semua cache (config, cache, view, route) berhasil dibersihkan di Hostinger!';
+    } catch (\Exception $e) {
+        return 'Gagal membersihkan cache: ' . $e->getMessage();
+    }
+});
+
+// Helper route untuk melihat log error Laravel di Hostinger
+Route::get('/show-logs', function () {
+    if (request('key') !== 'akbadmin123') {
+        return 'Akses ditolak. Gunakan URL: /show-logs?key=akbadmin123';
+    }
+
+    $logPath = storage_path('logs/laravel.log');
+    if (!file_exists($logPath)) {
+        return 'Belum ada log error laravel.log yang tercatat di server.';
+    }
+
+    $content = file_get_contents($logPath);
+    $lines = explode("\n", $content);
+    $lastLines = array_slice($lines, -150); // Ambil 150 baris terakhir
+    
+    return response(implode("\n", $lastLines), 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin Auth Routes
