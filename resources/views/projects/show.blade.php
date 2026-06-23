@@ -8,7 +8,7 @@
     <div class="h-20 bg-[#0A1E13]"></div>
 
     <!-- Project Header Hero -->
-    <section class="relative bg-cover bg-center bg-fixed pt-28 pb-20 overflow-hidden border-b border-[#C5A880]/15"
+    <section class="relative bg-cover bg-center pt-20 pb-16 overflow-hidden border-b border-[#C5A880]/15"
              style="background-image: url('{{ $project->cover_image ?? 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80' }}')">
         <!-- Dark gradient overlays for high text readability -->
         <div class="absolute inset-0 bg-[#0A1E13]/85 mix-blend-multiply z-0"></div>

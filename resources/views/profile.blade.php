@@ -8,7 +8,7 @@
     <div class="h-20 bg-[#0A1E13]"></div>
 
     <!-- Header Section -->
-    <section class="relative bg-cover bg-center bg-fixed py-28 border-b border-[#C5A880]/15 overflow-hidden"
+    <section class="relative bg-cover bg-center py-20 border-b border-[#C5A880]/15 overflow-hidden"
              style="background-image: url('{{ \App\Models\Setting::get('banner_profile_img', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80') }}')">
         <!-- High-contrast dark gradient overlays -->
         <div class="absolute inset-0 bg-[#0A1E13]/85 mix-blend-multiply z-0"></div>
